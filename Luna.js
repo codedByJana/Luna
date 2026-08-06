@@ -34,7 +34,11 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
-  client.commands.set(command.data.name, command);
+  if ('data' in command && 'execute' in command) {
+    client.commands.set(command.data.name, command);
+  } else {
+    console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+  }
 }
 
 client.login(config.token);
