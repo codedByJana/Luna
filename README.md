@@ -1,1 +1,2 @@
-# Luna ## Luna is a Discord Bot for Underdogs Server, a Server where Girls get to study, compete in a comparasion free - low stress environment to cultivate more dominant female figures in Cybersecurity
+# Luna 
+## Luna is a Discord Bot for Underdogs Server, a Server where Girls get to study, compete in a comparasion free - low stress environment to cultivate more dominant female figures in Cybersecurity
