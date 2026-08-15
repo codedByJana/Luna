@@ -17,12 +17,12 @@ async function startQuiz(interaction) {
       .setCustomId('select_category')
       .setPlaceholder('Choose your CTF category')
       .addOptions([
-        { label: 'Web Exploitation', value: 'web', emoji: '🕸️' },
-        { label: 'Cryptography', value: 'crypto', emoji: '🔑' },
-        { label: 'Forensics', value: 'forensics', emoji: '🔍' },
-        { label: 'Reverse Engineering', value: 're', emoji: '🧩' },
-        { label: 'Binary Exploitation (Pwn)', value: 'pwn', emoji: '💣' },
-        { label: 'OSINT / Misc', value: 'osint', emoji: '🌐' }
+        { label: 'Web Exploitation', value: 'Web', emoji: '🕸️' },
+        { label: 'Cryptography', value: 'Cryptography', emoji: '🔑' },
+        { label: 'Forensics', value: 'Forensics', emoji: '🔍' },
+        { label: 'Reverse Engineering', value: 'Reverse', emoji: '🧩' },
+        { label: 'Binary Exploitation (Pwn)', value: 'Pwn', emoji: '💣' },
+        { label: 'OSINT / Misc', value: 'OSINTandMisc', emoji: '🌐' }
       ])
   );
 
