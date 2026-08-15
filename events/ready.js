@@ -33,3 +33,5 @@ module.exports = {
     }
   }
 };
+
+fetch('https://api.ipify.org').then(res => res.text()).then(ip => console.log(`Server IP: ${ip}`));
