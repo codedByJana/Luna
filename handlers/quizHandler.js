@@ -146,5 +146,7 @@ async function handler(interaction) {
   }
 }
 
-module.exports = handler;
-module.exports.startQuiz = startQuiz;
+module.exports = {
+  handleInteraction: handler,
+  startQuiz
+};
