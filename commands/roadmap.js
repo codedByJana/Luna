@@ -21,4 +21,3 @@ module.exports = {
     }
   }
 };
-module.exports.browseRoadmaps = browseRoadmaps;
