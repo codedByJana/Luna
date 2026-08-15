@@ -48,7 +48,7 @@ const roadmapsData = {
         }
     },
     Cryptography: {
-        Book:
+        book:
         {
             "title": "🔑 Cryptography – Book-then-Apply Roadmap",
             "color": 0x342066,
@@ -156,7 +156,7 @@ const roadmapsData = {
                 }
             ]
         },
-        Visual:
+        visual:
         {
             "title": "🧩 Reverse Engineering – Visual Learner Roadmap",
             "color": 0x1e1b26,
