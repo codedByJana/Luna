@@ -10,7 +10,7 @@ module.exports = {
     const welcomeEmbed = new EmbedBuilder()
       .setColor(0x6952ea)
       .setTitle(`Welcome to The Underdogs, ${member.user.username}!`)
-      .setDescription('We are a girls-only CTF pack.\nPlease read and accept the rules to unlock the server.');
+      .setDescription('We are a girls-focused CTF pack.\nPlease read and accept the rules to unlock the server.');
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()

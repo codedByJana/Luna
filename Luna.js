@@ -8,7 +8,7 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,      // Required for welcome + roles
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.MessageContent, // TO-DO: investigate the need for this permission
   ],
   partials: [Partials.Channel, Partials.Message, Partials.GuildMember]
 });

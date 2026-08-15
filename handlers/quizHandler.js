@@ -35,13 +35,17 @@ async function startQuiz(interaction) {
 
 // ========== CATEGORY SELECT ==========
 async function handleCategorySelect(interaction) {
+  await interaction.deferUpdate();
   const category = interaction.values[0];
   if (!category) return;
 
   const userId = interaction.user.id;
-  const existing = db.getUser(userId) || {};
 
-  db.saveUser({
+  // Await database read
+  const existing = await db.getUser(userId) || {};
+
+  // Await database write
+  await db.saveUser({
     userId,
     category,
     learnerType: existing.learnerType || null,
@@ -51,7 +55,6 @@ async function handleCategorySelect(interaction) {
     rank: existing.rank || 'puppy'
   });
 
-  // Assign category role
   try {
     const roleId = config.categoryRoles[category];
     if (roleId) {
@@ -61,19 +64,19 @@ async function handleCategorySelect(interaction) {
     console.error('Failed to add category role:', err);
   }
 
-  // Show learner type menu
   const row = new ActionRowBuilder().addComponents(
     new StringSelectMenuBuilder()
-      .setCustomId('select_learner_type')
+      // Embed the category into the ID for the next step to catch
+      .setCustomId(`select_learner_${category}`)
       .setPlaceholder('Choose your learning style')
       .addOptions([
-        { label: 'Book-then-Apply (Theory first)', value: 'book', emoji: '📚' },
-        { label: 'Visual Learner (Videos + Practice)', value: 'visual', emoji: '👀' },
-        { label: 'Show Both Styles', value: 'both', emoji: '📖' }
+        { label: 'Book-then-Apply (Theory first)', value: 'book' },
+        { label: 'Visual Learner (Videos + Practice)', value: 'visual' },
+        { label: 'Show Both Styles', value: 'both' }
       ])
   );
 
-  await interaction.update({
+  await interaction.editReply({
     content: '**Step 2/2 – Choose your learning style**',
     components: [row],
     embeds: []
@@ -82,21 +85,23 @@ async function handleCategorySelect(interaction) {
 
 // ========== LEARNER TYPE SELECT ==========
 async function handleLearnerTypeSelect(interaction) {
+  await interaction.deferUpdate();
   const learnerType = interaction.values[0];
   if (!learnerType) return;
 
   const userId = interaction.user.id;
-  const existing = db.getUser(userId) || {};
-  const category = existing.category;
 
-  // Save learner type (even if they chose "both")
-  db.saveUser({
+  // Extract category securely from the customId instead of the database
+  const category = interaction.customId.replace('select_learner_', '');
+
+  // Await database read/write
+  const existing = await db.getUser(userId) || {};
+  await db.saveUser({
     ...existing,
     userId,
-    learnerType: learnerType === 'both' ? 'book' : learnerType // default to book if both
+    learnerType: learnerType === 'both' ? 'book' : learnerType
   });
 
-  // Get the correct embed(s)
   let embedsToSend = [];
 
   if (learnerType === 'both') {
@@ -111,31 +116,14 @@ async function handleLearnerTypeSelect(interaction) {
       .setCustomId(`view_both_${category}`)
       .setLabel('View Both Styles')
       .setStyle(ButtonStyle.Secondary)
-      .setEmoji('📖')
   );
 
-  await interaction.update({
+  await interaction.editReply({
     content: learnerType === 'both'
       ? `Here are **both** roadmaps for **${category.toUpperCase()}**:`
       : `Here is your personalized roadmap:`,
     embeds: embedsToSend,
     components: learnerType === 'both' ? [] : [buttonRow]
-  });
-}
-
-// ========== VIEW BOTH BUTTON ==========
-async function handleViewBoth(interaction) {
-  const category = interaction.customId.replace('view_both_', '');
-
-  const embeds = [
-    roadmaps.get(category, 'book'),
-    roadmaps.get(category, 'visual')
-  ];
-
-  await interaction.reply({
-    content: `Both learning styles for **${category.toUpperCase()}**:`,
-    embeds,
-    ephemeral: true
   });
 }
 
@@ -145,7 +133,8 @@ async function handler(interaction) {
     if (interaction.customId === 'select_category') {
       return handleCategorySelect(interaction);
     }
-    if (interaction.customId === 'select_learner_type') {
+    // Update this line to catch the dynamic ID containing the category
+    if (interaction.customId.startsWith('select_learner_')) {
       return handleLearnerTypeSelect(interaction);
     }
   }

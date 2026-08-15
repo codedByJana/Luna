@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  missedDays: {
+    type: Number,
+    default: 0,
+  },
   lastTaskDate: String,
   rank: {
     type: String,
@@ -82,7 +86,13 @@ async function saveUser(data) {
   return payload;
 }
 
+async function getAllUsers() {
+  await connectToDatabase();
+  return User.find().lean();
+}
+
 module.exports = {
   getUser,
   saveUser,
+  getAllUsers,
 };

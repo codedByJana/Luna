@@ -32,9 +32,11 @@ module.exports = {
         return;
       }
 
-      // Pass to handlers
-      await quizHandler(interaction, client);
-      await taskHandler(interaction, client);
+
+      await quizHandler.handleInteraction(interaction);
+      if (typeof taskHandler.handleInteraction === 'function') {
+        await taskHandler.handleInteraction(interaction);
+      }
     }
   }
 };
