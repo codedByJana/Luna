@@ -32,10 +32,23 @@ module.exports = {
         return;
       }
 
+      try {
+        if (quizHandler.handleInteraction) {
+          await quizHandler.handleInteraction(interaction);
+        }
+        if (taskHandler.handleInteraction) {
+          await taskHandler.handleInteraction(interaction);
+        }
+      } catch (error) {
+        console.error('Interaction Handler Error:', error);
 
-      await quizHandler.handleInteraction(interaction);
-      if (typeof taskHandler.handleInteraction === 'function') {
-        await taskHandler.handleInteraction(interaction);
+        // Attempt to notify the user without crashing
+        const errorMessage = { content: 'There was an error processing this menu!', ephemeral: true };
+        if (interaction.deferred || interaction.replied) {
+          await interaction.followUp(errorMessage).catch(e => console.error(e));
+        } else {
+          await interaction.reply(errorMessage).catch(e => console.error(e));
+        }
       }
     }
   }

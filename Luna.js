@@ -40,5 +40,16 @@ for (const file of commandFiles) {
     console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
   }
 }
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(' [ANTI-CRASH] Unhandled Rejection:', promise, 'Reason:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error(' [ANTI-CRASH] Uncaught Exception:', error);
+});
+
+process.on('uncaughtExceptionMonitor', (error, origin) => {
+  console.error(' [ANTI-CRASH] Uncaught Exception Monitor:', error, origin);
+});
 
 client.login(config.token);
