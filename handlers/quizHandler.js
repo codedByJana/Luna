@@ -8,7 +8,7 @@ const {
 
 const config = require('../config');
 const db = require('../utils/database');
-const roadmaps = require('../embeds/roadmaps'); // We will create this file
+const roadmaps = require('../embeds/roadmaps'); 
 
 // ========== START QUIZ ==========
 async function startQuiz(interaction) {
@@ -21,8 +21,8 @@ async function startQuiz(interaction) {
         { label: 'Cryptography', value: 'Cryptography', emoji: '🔑' },
         { label: 'Forensics', value: 'Forensics', emoji: '🔍' },
         { label: 'Reverse Engineering', value: 'Reverse', emoji: '🧩' },
-        { label: 'Binary Exploitation (Pwn)', value: 'Pwn', emoji: '💣' },
-        { label: 'OSINT / Misc', value: 'OSINTandMisc', emoji: '🌐' }
+        { label: 'Binary Exploitation (Pwn)', value: 'binary_exploitation', emoji: '💣' },
+        { label: 'OSINT / Misc', value: 'osint_misc', emoji: '🌐' }
       ])
   );
 
@@ -126,6 +126,39 @@ async function handleLearnerTypeSelect(interaction) {
     components: learnerType === 'both' ? [] : [buttonRow]
   });
 }
+
+const { getRoadmapEmbed } = require('../embeds/roadmaps');
+
+async function handleRoadmapNavigation(interaction) {
+  if (!interaction.isButton()) return false;
+
+  const id = interaction.customId;
+  if (!id.startsWith('roadmap_')) return false;
+
+  // customId format: roadmap_next:web:book:0
+  const [actionWithPrefix, category, path, indexStr] = id.split(':');
+  const action = actionWithPrefix.replace('roadmap_', ''); // next | prev | switch
+  let stageIndex = parseInt(indexStr, 10) || 0;
+  let currentPath = path || 'book';
+
+  if (action === 'next') stageIndex += 1;
+  if (action === 'prev') stageIndex -= 1;
+  if (action === 'switch') {
+    currentPath = currentPath === 'visual' ? 'book' : 'visual';
+    // keep same stage index when switching path
+  }
+
+  const payload = getRoadmapEmbed(category, currentPath, stageIndex);
+
+  await interaction.update({
+    embeds: payload.embeds,
+    components: payload.components
+  });
+
+  return true;
+}
+
+module.exports = { handleRoadmapNavigation };
 
 // ========== MAIN HANDLER ==========
 async function handler(interaction) {

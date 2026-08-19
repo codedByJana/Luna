@@ -1,0 +1,1529 @@
+{
+  "categories": [
+    {
+      "category": "Cryptography",
+      "paths": {
+        "book": {
+          "stages": [
+            {
+              "title": "Study cryptographic concepts from Understanding Cryptography.",
+              "resources": [
+                {
+                  "title": "Understanding Cryptography",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/11bywcNWGF-8NFLQPXGAC90_pbB4a3rMu/view?usp=sharing"
+                }
+              ]
+            },
+            {
+              "title": "Learn and apply concepts through CryptoHack Learn.",
+              "resources": [
+                {
+                  "title": "CryptoHack Learn",
+                  "type": "interactive_course",
+                  "link": "https://cryptohack.org/courses/"
+                }
+              ]
+            },
+            {
+              "title": "Practice cryptography challenges on CryptoHack.",
+              "resources": [
+                {
+                  "title": "CryptoHack Practice",
+                  "type": "practice",
+                  "link": "https://cryptohack.org/challenges/"
+                }
+              ]
+            }
+          ]
+        },
+        "visual": {
+          "stages": [
+            {
+              "title": "Learn cryptography concepts through CryptoHack and pwn.college material.",
+              "resources": [
+                {
+                  "title": "pwn.college",
+                  "type": "videos/course",
+                  "link": "https://pwn.college/"
+                },
+                {
+                  "title": "CryptoHack Learn",
+                  "type": "interactive_course",
+                  "link": "https://cryptohack.org/courses/"
+                }
+              ]
+            },
+            {
+              "title": "Apply concepts immediately through CryptoHack and pwn.college practice.",
+              "resources": [
+                {
+                  "title": "CryptoHack Practice",
+                  "type": "practice",
+                  "link": "https://cryptohack.org/challenges/"
+                },
+                {
+                  "title": "pwn.college Practice",
+                  "type": "practice",
+                  "link": "https://pwn.college/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Forensics",
+      "paths": {
+        "book": {
+          "stages": [
+            {
+              "title": "Foundations",
+              "description": "Methodology, Acquisition, Windows artifacts, Linux artifacts, Open-source tools",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics (Kävrestad, Birath, Clarke – 3rd ed.)",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                }
+              ]
+            },
+            {
+              "title": "Disk Forensics",
+              "description": "File systems, Recovery, Registry, Timelines, Apply immediately",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                }
+              ]
+            },
+            {
+              "title": "Memory Forensics",
+              "description": "",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                },
+                {
+                  "title": "Volatility documentation/examples",
+                  "type": "documentation",
+                  "link": "https://volatility3.readthedocs.io/"
+                }
+              ]
+            },
+            {
+              "title": "Network Forensics",
+              "description": "Network forensics concepts, Wireshark basics, Apply concepts to captures",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                },
+                {
+                  "title": "Wireshark",
+                  "type": "tool/documentation",
+                  "link": "https://www.wireshark.org/"
+                }
+              ]
+            },
+            {
+              "title": "Practice Labs",
+              "description": "Do in order, no skips",
+              "resources": [
+                {
+                  "title": "pwn.college Digital Forensics modules",
+                  "type": "practice",
+                  "link": "https://pwn.college/"
+                },
+                {
+                  "title": "CyberDefenders",
+                  "type": "practice",
+                  "link": "https://cyberdefenders.org/"
+                },
+                {
+                  "title": "HTB Sherlocks",
+                  "type": "practice",
+                  "link": "https://app.hackthebox.com/sherlocks"
+                },
+                {
+                  "title": "TryHackMe DFIR rooms / File System Analysis / Disk Image Analysis",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                }
+              ],
+              "sequence": [
+                "pwn.college Digital Forensics modules (filesystems + memory)",
+                "CyberDefenders: Disk Forensics → Memory Forensics → Network Forensics",
+                "HTB Sherlocks (Easy → Medium DFIR ones)",
+                "THM DFIR rooms / File System Analysis / Disk Image Analysis modules for targeted application"
+              ]
+            }
+          ]
+        },
+        "visual": {
+          "stages": [
+            {
+              "title": "Foundations",
+              "description": "",
+              "resources": [
+                {
+                  "title": "HTB Academy: Introduction to Digital Forensics",
+                  "type": "course",
+                  "link": "https://academy.hackthebox.com/"
+                },
+                {
+                  "title": "THM: DFIR: An Introduction",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM: Digital Forensics Fundamentals",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                }
+              ]
+            },
+            {
+              "title": "Disk Forensics",
+              "description": "If available.",
+              "resources": [
+                {
+                  "title": "THM: File System Analysis module",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM: Autopsy room",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM: Windows Forensics 1/2",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "HTB Academy Linux Forensics module",
+                  "type": "course",
+                  "link": "https://academy.hackthebox.com/"
+                }
+              ]
+            },
+            {
+              "title": "Memory Forensics",
+              "description": "",
+              "resources": [
+                {
+                  "title": "THM Volatility rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM Redline rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "HTB Academy memory sections",
+                  "type": "course",
+                  "link": "https://academy.hackthebox.com/"
+                }
+              ]
+            },
+            {
+              "title": "Network Forensics",
+              "description": "",
+              "resources": [
+                {
+                  "title": "THM network forensics / PCAP rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "CyberDefenders Network Forensics intro labs",
+                  "type": "practice",
+                  "link": "https://cyberdefenders.org/"
+                }
+              ]
+            },
+            {
+              "title": "Practice Labs",
+              "description": "",
+              "resources": [
+                {
+                  "title": "CyberDefenders",
+                  "type": "practice",
+                  "link": "https://cyberdefenders.org/"
+                },
+                {
+                  "title": "HTB Sherlocks",
+                  "type": "practice",
+                  "link": "https://app.hackthebox.com/sherlocks"
+                },
+                {
+                  "title": "pwn.college Digital Forensics",
+                  "type": "practice",
+                  "link": "https://pwn.college/"
+                },
+                {
+                  "title": "THM Advanced Endpoint Investigations / remaining DFIR path rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                }
+              ],
+              "sequence": [
+                "CyberDefenders tracks: Disk → Memory → Network (guided + free challenges first)",
+                "HTB Sherlocks (Easy DFIR first)",
+                "pwn.college Digital Forensics (filesystems + memory) for pure hands-on",
+                "THM Advanced Endpoint Investigations or remaining DFIR path rooms"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Reverse",
+      "paths": {
+        "common": {
+          "stages": [
+            {
+              "title": "Mindset & Commitment",
+              "description": "Understand the commitment and mindset required for learning reverse engineering.",
+              "resources": [
+                {
+                  "title": "Are You Willing to Learn RE? - AT4RE",
+                  "link": "https://www.at4re.net/f/thread-1636.html"
+                },
+                {
+                  "title": "Reverse Engineering - Wikipedia",
+                  "link": "https://en.wikipedia.org/wiki/Reverse_engineering#Software"
+                },
+                {
+                  "title": "The Process of Mastering a Skill",
+                  "link": "https://azeria-labs.com/the-process-of-mastering-a-skill/"
+                },
+                {
+                  "title": "Split-Code External Blogs",
+                  "link": "https://www.split-code.com/external_blogs.html"
+                }
+              ]
+            },
+            {
+              "title": "Programming",
+              "description": "Build a solid foundation in low-level programming concepts and memory management.",
+              "resources": {
+                "book": [
+                  {
+                    "title": "Practical Reverse Engineering - Chapter 1",
+                    "link": "https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315"
+                  },
+                  {
+                    "title": "Practical Binary Analysis - Chapters 1–3",
+                    "link": "https://practicalbinaryanalysis.com/"
+                  }
+                ],
+                "visual": [
+                  {
+                    "title": "C Programming - Neso Academy",
+                    "link": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR"
+                  },
+                  {
+                    "title": "C Programming - Caleb Curry",
+                    "link": "https://www.youtube.com/playlist?list=PLVp0hvzMSQHTlz2CNlbhq-E6WYYujm7b8"
+                  },
+                  {
+                    "title": "Learn C++ (preferred)",
+                    "link": "https://learncpp.com/"
+                  }
+                ]
+              },
+              "topics": [
+                "C/C++",
+                "Pointers",
+                "Memory allocation",
+                "Low-level programming concepts"
+              ]
+            },
+            {
+              "title": "OS Basics",
+              "description": "Learn fundamental operating system concepts essential for reverse engineering.",
+              "resources": {
+                "visual": [
+                  {
+                    "title": "Operating Systems Playlist 1",
+                    "link": "https://www.youtube.com/playlist?list=PLxIvc-MGOs6ib0oK1z9C46DeKd9rRcSMY"
+                  },
+                  {
+                    "title": "Operating Systems Playlist 2",
+                    "link": "https://www.youtube.com/playlist?list=PLkpYqKNqc_CvCqERss2WBKWE3fb1jEmKE"
+                  },
+                  {
+                    "title": "Operating Systems Playlist 3",
+                    "link": "https://www.youtube.com/playlist?list=PLgre7dUq8DGKbtnlMuJPvPYlvLdXOC9uh"
+                  }
+                ]
+              },
+              "note": "These playlists are optional; you only need the basics of operating systems."
+            },
+            {
+              "title": "x86 / x86-64 Assembly Fundamentals",
+              "description": "Master the foundation of low-level analysis through assembly language.",
+              "resources": [
+                {
+                  "title": "Reverse Code Engineering - Mahara-Tech",
+                  "link": "https://maharatech.gov.eg/course/view.php?id=1423"
+                },
+                {
+                  "title": "x86-64 Assembly - YouTube",
+                  "link": "https://www.youtube.com/playlist?list=PLUFkSN0XLZ-m9B0DhHjkXd8foIMuZO1Gd"
+                },
+                {
+                  "title": "Architecture 1001: x86-64 Assembly (preferred)",
+                  "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1/about"
+                },
+                {
+                  "title": "Assembly Language Tutorial",
+                  "link": "https://www.youtube.com/watch?v=nGivmJMlBH8"
+                },
+                {
+                  "title": "Practical Reverse Engineering - Chapter 1",
+                  "link": "https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315"
+                }
+              ],
+              "topics": [
+                "Low-level programming",
+                "Assembly analysis",
+                "Analytical skills"
+              ],
+              "note": "Take modern x86-64 assembly slowly and practice along the way."
+            },
+            {
+              "title": "Binary Formats",
+              "description": "Understand how executables are structured and loaded into memory.",
+              "resources": [
+                {
+                  "title": "Life of Binaries",
+                  "link": "https://opensecuritytraining.info/LifeOfBinaries.html"
+                },
+                {
+                  "title": "Practical Binary Analysis - Chapters 1–3",
+                  "link": "https://practicalbinaryanalysis.com/"
+                }
+              ],
+              "topics": [
+                "Executable structure",
+                "Build structure",
+                "Windows binaries",
+                "PE loading concepts",
+                "ELF",
+                "PE"
+              ]
+            },
+            {
+              "title": "Reverse Engineering & Malware Analysis",
+              "description": "Apply reverse engineering skills to analyze and understand malicious software.",
+              "resources": [
+                {
+                  "title": "Practical Malware Analysis",
+                  "link": "https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901/ref=pd_bxgy_d_sccl_2/147-0820845-5157731?pd_rd_w=6ZrCa&content-id=amzn1.sym.dcf559c6-d374-405e-a13e-133e852d81e1&pf_rd_p=dcf559c6-d374-405e-a13e-133e852d81e1&pf_rd_r=916XKN23015TJAR7X8ZV&pd_rd_wg=DJEDH&pd_rd_r=ee10e4ae-714d-47b7-8f42-63ba113d0bc3&pd_rd_i=1593272901&psc=1"
+                },
+                {
+                  "title": "Learning Malware Analysis",
+                  "link": "https://www.amazon.com/dp/1788392507/ref=mes-dp?_encoding=UTF8"
+                },
+                {
+                  "title": "Mastering Malware Analysis (advanced)",
+                  "link": "https://www.amazon.com/Mastering-Malware-Analysis-practical-cybercrime-dp-1803240245/dp/1803240245/ref=dp_ob_title_bk"
+                }
+              ],
+              "notes": [
+                "The real work and practice starts here.",
+                "Practical Malware Analysis is the backbone and core of learning malware analysis and reverse engineering through practical exercises alongside the book.",
+                "Learning Malware Analysis is preferred for debugging topics since Practical Malware Analysis is relatively old.",
+                "Mastering Malware Analysis is an advanced resource."
+              ]
+            },
+            {
+              "title": "Windows Internals",
+              "description": "Deep dive into Windows architecture for advanced reverse engineering.",
+              "resources": [
+                {
+                  "title": "Windows Internals Book 1",
+                  "link": "https://www.microsoftpressstore.com/store/windows-internals-part-1-system-architecture-processes-9780735684188"
+                },
+                {
+                  "title": "Windows Internals Book 2",
+                  "link": "https://www.microsoftpressstore.com/store/windows-internals-part-2-9780135462409"
+                },
+                {
+                  "title": "Windows Internals Master Course by Pavel Yosifovich",
+                  "link": "https://trainsec.net/windows-internals-master/"
+                }
+              ],
+              "topics": [
+                "Processes",
+                "Memory manager",
+                "Loader behavior",
+                "Deeper Windows foundations"
+              ],
+              "note": "You do not need to finish Phase 4 before starting Phase 5; they can be studied together."
+            },
+            {
+              "title": "Practice Platforms",
+              "description": "",
+              "resources": [
+                {
+                  "title": "Crackmes.one",
+                  "link": "https://crackmes.one/",
+                  "focus": "Password checks, keygens, patching basics; best for building fundamentals"
+                },
+                {
+                  "title": "Root-me",
+                  "link": "https://root-me.org/",
+                  "focus": "Beginner and intermediate challenges; mix reversing with fundamentals"
+                },
+                {
+                  "title": "Google's Flare-ON CTF",
+                  "link": "https://flare-on.com/",
+                  "focus": "Yearly CTF"
+                },
+                {
+                  "title": "CTFtime",
+                  "link": "https://ctftime.org/",
+                  "focus": "Weekly online CTFs"
+                }
+              ]
+            },
+            {
+              "title": "Tools and Reference Material",
+              "description": "",
+              "resources": {
+                "video_resources": [
+                  {
+                    "title": "OALabs - Malware Analysis",
+                    "link": "https://www.youtube.com/@OALABS",
+                    "note": "Real-world-style walkthroughs; follow along and take notes"
+                  }
+                ],
+                "IDA Pro": [
+                  {
+                    "title": "IDA Pro",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "The IDA Pro Book",
+                    "link": "https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898"
+                  },
+                  {
+                    "title": "Introduction to IDA Pro",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1101_IntroIDA+2024_v1/about"
+                  }
+                ],
+                "Ghidra": [
+                  {
+                    "title": "Ghidra",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "The Ghidra Book: The Definitive Guide",
+                    "link": "https://www.amazon.com/Ghidra-Book-Definitive-Guide/dp/1718501021"
+                  },
+                  {
+                    "title": "Introduction to Ghidra",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1102_IntroGhidra+2024_v2/about"
+                  }
+                ],
+                "Binary Ninja": [
+                  {
+                    "title": "Binary Ninja",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "Introduction to Binary Ninja",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1103_Intro_Binja+2025_v1/about"
+                  }
+                ],
+                "GDB": [
+                  {
+                    "title": "GDB - Linux Debugging",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "Introduction to GDB",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1012_IntroGDB+2024_v1/about"
+                  }
+                ],
+                "WinDbg": [
+                  {
+                    "title": "WinDbg - Windows Debugging",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "Introduction to WinDbg",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1011_WinDbg1+2024_v1/about"
+                  }
+                ],
+                "x64dbg": [
+                  {
+                    "title": "x64dbg",
+                    "type": "tool",
+                    "note": "Powerful user-mode Windows debugger"
+                  }
+                ],
+                "Linux Resources": [
+                  {
+                    "title": "The Linux Programming Interface (Michael Kerrisk)",
+                    "link": "https://www.amazon.com/Linux-Programming-Interface-System-Handbook/dp/1593272200",
+                    "topics": [
+                      "syscalls",
+                      "processes",
+                      "files",
+                      "signals"
+                    ],
+                    "note": "Excellent for Linux reversing"
+                  }
+                ],
+                "Architecture References": [
+                  {
+                    "title": "Intel 64 and IA-32 Software Developer Manuals",
+                    "link": "https://cdrdv2.intel.com/v1/dl/getContent/671200",
+                    "note": "Authoritative reference for instructions, flags, and low-level details"
+                  },
+                  {
+                    "title": "AMD64 Architecture Programmer's Manual",
+                    "link": "https://bluewaters.ncsa.illinois.edu/liferay-content/document-library/amd_2_24593.pdf",
+                    "note": "Excellent alternative/reference for x86-64 specifics"
+                  }
+                ],
+                "Additional Windows Resources": [
+                  {
+                    "title": "Windows 10 System Programming (Pavel Yosifovich)",
+                    "link": "https://www.amazon.com/Windows-10-System-Programming-Part/dp/B086Y6M7LH"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Acknowledgments",
+              "description": "",
+              "resources": [
+                {
+                  "title": "0b3l1sk",
+                  "link": "https://eg.linkedin.com/in/mahmoud-abdullah-b35961152"
+                },
+                {
+                  "title": "ELJoOker",
+                  "link": "https://www.linkedin.com/in/youssef-ayman-79092624b/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "Web",
+      "paths": {
+        "common": {
+          "stages": [
+            {
+              "title": "Web Application Fundamentals",
+              "description": "Starting with foundations you need to start your journey.",
+              "resources": {
+                "book": [
+                  {
+                    "title": "Web Application Fundamentals / HTTP, frontend, database and backend study",
+                    "link": "https://www.theodinproject.com/paths/full-stack-javascript"
+                  }
+                ],
+                "visual": [
+                  {
+                    "title": "Web application fundamentals courses",
+                    "link": "https://academy.hackthebox.com/app/module/75"
+                  }
+                ]
+              },
+              "topics": {
+                "HTTP Protocol": [
+                  "HTTP Requests and Responses",
+                  "Headers and Status Codes",
+                  "Cookies and Sessions",
+                  "What are WebSockets"
+                ],
+                "Common Terms": [
+                  "What is Proxy",
+                  "What is CDN",
+                  "What is Caching Server",
+                  "What is WAF (Web Application Firewall)",
+                  "What is Load Balancer"
+                ],
+                "Frontend Technologies": [
+                  "HTML Structure and Semantics",
+                  "CSS Styling and Layout overview"
+                ],
+                "JavaScript Fundamentals": [
+                  "Variables and Data Types",
+                  "Loops and Control Structures",
+                  "Issuing HTTP requests with fetch/XMLHttpRequest",
+                  "Synchronous vs Asynchronous",
+                  "Promises and Async/Await",
+                  "Functions and Scope",
+                  "DOM Manipulation",
+                  "Events",
+                  "Listeners",
+                  "Post Message",
+                  "localStorage",
+                  "sessionStorage",
+                  "cookies"
+                ],
+                "Database Fundamentals": [
+                  "MySQL Relational Database",
+                  "MongoDB NoSQL Database",
+                  "SQL Queries and Operations",
+                  "Database User Roles and Permissions",
+                  "Bonus: MySQL vs SQLite vs PostgreSQL"
+                ],
+                "Backend Technologies": [
+                  "Study Any Of: PHP, Node.js/Express, or Python Flask/Django",
+                  "Server-Side Programming Fundamentals",
+                  "API Development and Design",
+                  "Database Integration and ORM"
+                ]
+              }
+            },
+            {
+              "title": "Build Your First Web Application",
+              "description": "Create a complete web application with essential features and security considerations.",
+              "topics": {
+                "Authentication System": [
+                  "User Registration",
+                  "Login Functionality",
+                  "Password Reset/Forget Password",
+                  "Session Management"
+                ],
+                "Core Features": [
+                  "File Upload System",
+                  "Search Functionality",
+                  "User Profile Management"
+                ],
+                "Database Implementation": [
+                  "Raw SQL Queries Implementation",
+                  "Bonus: PDO (PHP Data Objects) Implementation",
+                  "Enable Database Logging and Monitoring",
+                  "Use Burp Suite to Check HTTP History",
+                  "Analyze Requests and Responses"
+                ],
+                "Authorization & Roles": [
+                  "Admin Role Implementation",
+                  "User Role Management",
+                  "Access Control Lists",
+                  "Permission-Based Features"
+                ],
+                "Bonus: Rewrite with JS Framework": [
+                  "Choose React, Vue, or Angular",
+                  "Convert to Single Page Application",
+                  "Implement State Management",
+                  "Add Modern UI Components",
+                  "Optimize Performance"
+                ],
+                "Bonus: Use JWT Instead of Cookies": [
+                  "JWT Token Structure and Claims",
+                  "Token Generation and Validation",
+                  "Secure Token Storage (localStorage/sessionStorage)",
+                  "Token Refresh Mechanism",
+                  "Stateless Authentication"
+                ]
+              }
+            },
+            {
+              "title": "Mapping Your Target",
+              "description": "Before finding bugs in an application, first understand what it is about.",
+              "topics": [
+                "What is the goal of this app",
+                "Target user category - is it for public usage or for internal usage",
+                "Use all functions in the app with proxy configured to log requests history",
+                "Check different roles",
+                "Map all inputs",
+                "What is the technology used in backend/frontend/web server/operating system",
+                "Does it use a framework for client side or not?",
+                "Quick check on headers - are there weird headers? Is there caching system? Can headers help fingerprint app",
+                "Check cookies, auth headers, local storage",
+                "Quick check on console - are there errors?",
+                "What caught your eyes while exploring you want to focus on later?"
+              ]
+            },
+            {
+              "title": "Common Client-Side Vulnerabilities",
+              "description": "Learn to identify and exploit common client-side web application vulnerabilities.",
+              "topics": {
+                "CORS": [
+                  "What is SOP",
+                  "What is CORS",
+                  "CORS Misconfiguration Impact",
+                  "Solving Labs",
+                  "Mitigations"
+                ],
+                "Cross-Site Scripting (XSS)": [
+                  "XSS Root Cause",
+                  "How To Search For it ?",
+                  "Reflected vs Self vs Stored XSS",
+                  "What is Blind XSS",
+                  "DOM XSS",
+                  "XSS Impact?",
+                  "HttpOnly Flag Restriction",
+                  "Bypassing Common Filters",
+                  "Solving XSS Labs",
+                  "XSS Prevention Techniques"
+                ],
+                "Cross-Site Request Forgery (CSRF)": [
+                  "Why We Need CSRF Tokens?",
+                  "How Does CSRF Implemented",
+                  "CSRF Attack Vectors",
+                  "CSRF Misconfigurations",
+                  "SameSite Attribute Different Values",
+                  "Chaining XSS to Bypass CSRF",
+                  "CSRF Prevention Strategies"
+                ],
+                "Other Topics (optional as a start)": [
+                  "What is a CSP",
+                  "Common CSP Misconfigurations",
+                  "Clickjacking",
+                  "DOM Clobbering",
+                  "Web Messages",
+                  "Post Message Attack",
+                  "XS Leaks Attack Vectors",
+                  "CSS Injection"
+                ]
+              }
+            },
+            {
+              "title": "Common Server-Side Vulnerabilities",
+              "description": "Learn to identify and exploit common server-side web application vulnerabilities. To ensure you understand a vulnerability, ask yourself - what is it, what is the root cause, how to exploit, mitigation.",
+              "topics": {
+                "Command Injection": [
+                  "What is Command Injection",
+                  "Command Injection vs Code Injection",
+                  "Command Injection Examples",
+                  "Mitigations"
+                ],
+                "SQL Injection": [
+                  "Understand SQL Injection Root Cause",
+                  "In-Band SQL Injection (Union and Error Based)",
+                  "Blind SQL Injection (Time/Boolean)",
+                  "Out of Band SQL Injection",
+                  "2nd Order SQL Injection",
+                  "RCE From SQL Injection Root Cause",
+                  "SQL Injection Mitigation",
+                  "Writing Your Own Script to Exploit the Bug",
+                  "Bonus: Try Exploit the Bug in MySQL/Oracle/SQLite - What is the Difference"
+                ],
+                "Server-Side Template Injection (SSTI)": [
+                  "What is Template Engines and How Does it Work?",
+                  "Write Simple Python App with Jinja2",
+                  "SSTI Root Cause",
+                  "Exploitation of SSTI",
+                  "Does Same Concept Apply for Smarty PHP?",
+                  "Mitigation For SSTI"
+                ],
+                "NoSQL Injection": [
+                  "What is NoSQL Databases",
+                  "MongoDB Example",
+                  "NoSQL Injection Root Cause",
+                  "Solving Labs",
+                  "What is Redis Injection?",
+                  "Gopher Protocol"
+                ],
+                "Server-Side Request Forgery (SSRF)": [
+                  "What is SSRF",
+                  "SSRF Root Cause",
+                  "How to Identify SSRF From Client Side Request",
+                  "SSRF Examples",
+                  "SSRF in AWS Case Study",
+                  "SSRF To RCE Gopher Example",
+                  "SSRF Read Local Files",
+                  "PDF Generators SSRF",
+                  "SSRF Mitigation"
+                ],
+                "File Upload Attacks": [
+                  "Understand File Upload Process",
+                  "What is Unrestricted File Upload",
+                  "What Environment Unrestricted File Upload Can Lead to RCE",
+                  "Bypass Common Mitigations",
+                  "File Upload Attacks Mitigations",
+                  "Arbitrary File Write Bug",
+                  "What is ZipSlip Vulnerability ?"
+                ],
+                "Broken Access Control": [
+                  "What is Access Control",
+                  "How Does Access Control Applied in Web Apps",
+                  "Broken Access Control Impact",
+                  "Broken Object Level Authorization",
+                  "Broken Function Level Authorization",
+                  "Solving Labs",
+                  "Mitigations"
+                ],
+                "Insecure Deserialization": [
+                  "What is Serialization in Software",
+                  "What are Serialization Formats",
+                  "Understand Process of Serializing/Deserializing",
+                  "When Does Deserialization Becomes Dangerous?",
+                  "What are Gadgets",
+                  "What are Common Vulnerable Functions in Languages",
+                  "Solving Labs PHP/Java",
+                  "Mitigations"
+                ],
+                "XML Attacks": [
+                  "What is XML Format",
+                  "What is XPATH",
+                  "XPATH Injection",
+                  "External XML Entity Injection",
+                  "Understand Root Cause of XML Attacks",
+                  "Mitigations"
+                ],
+                "Authentication Attacks": [
+                  "SQL Injection in Authentication",
+                  "Bypass Authentication Flow",
+                  "Bypass 2FA Examples",
+                  "Host Header Injection in Forget Password Link",
+                  "Weak Token Generated",
+                  "Bypass Rate Limiting",
+                  "Missing Rate Limit on OTP",
+                  "Bypass Account Verification",
+                  "Bypass Captcha",
+                  "Mitigations"
+                ],
+                "Race Condition": [
+                  "What is Race Condition",
+                  "Race Condition Example in File Upload",
+                  "Race Conditions Example in Bypassing Server-Side Restrictions",
+                  "Race Conditions Root Cause",
+                  "Race Conditions Mitigations"
+                ],
+                "Vulnerable and Outdated Components": [
+                  "Identify Outdated Components Used by Backend",
+                  "How to Search for CVEs and Exploits Online"
+                ],
+                "API Attacks": [
+                  "What is Authorization Headers",
+                  "What are APIs",
+                  "RESTful APIs vs SOAP vs GraphQL",
+                  "API Documentation",
+                  "API Versioning Attacks",
+                  "How to Interact with APIs Without Web App",
+                  "Mass Assignment Vulnerabilities",
+                  "API Rate Limiting",
+                  "API Fuzzing and Testing",
+                  "GraphQL Attacks"
+                ],
+                "Directory Traversal Attacks": [
+                  "What is Directory Traversal",
+                  "Arbitrary File Write",
+                  "Arbitrary File Read",
+                  "LFI vs RFI vs LFD in PHP",
+                  "Mitigations"
+                ],
+                "Prototype Pollution": [
+                  "What is a Prototype",
+                  "Root Cause of Prototype Pollutions",
+                  "Examples in Node.js EJS Engine",
+                  "Mitigations"
+                ],
+                "Improper Session Handling": [
+                  "Session Fixation",
+                  "Session Puzzling",
+                  "Improper Session Validation",
+                  "Inactive Sessions Remain Valid After Logout",
+                  "Mitigations"
+                ],
+                "Cryptographic Attacks (Optional)": [
+                  "Weak Generation Function For Tokens",
+                  "AES CBC Oracle Attacks",
+                  "Hash Length Extension Attacks",
+                  "Hash Collisions (MD5, SHA-1)",
+                  "Padding Oracle Attacks",
+                  "Timing Attacks on Cryptographic Operations",
+                  "Weak Random Number Generation",
+                  "Cryptographic Implementation Flaws",
+                  "Mitigations"
+                ],
+                "Logic Bugs": [
+                  "Logic bugs depend on application business itself",
+                  "Check multi-step process - can you drop one step and continue or does it check sequence?",
+                  "Check response manipulation bugs",
+                  "Check what data inputs can cause errors - does it have to be a positive number?"
+                ],
+                "Web Caching Attacks": [
+                  "What is Caching Systems",
+                  "Cache Keys vs Cache Rules",
+                  "URL Normalization & Different URL Delimiters",
+                  "Web Cache Poisoning",
+                  "Web Cache Deception"
+                ],
+                "HTTP Request Smuggling": [
+                  "What is HTTP Request Smuggling",
+                  "Understanding Content-Length and Transfer-Encoding Headers",
+                  "How Backend and Frontend Servers Process HTTP Requests Differently",
+                  "CL.TE Request Smuggling (Front-end uses Content-Length, Back-end uses Transfer-Encoding)",
+                  "TE.CL Request Smuggling (Front-end uses Transfer-Encoding, Back-end uses Content-Length)",
+                  "Impact of HTTP Request Smuggling",
+                  "Mitigation from Backend Server",
+                  "Mitigation from Proxy/Load Balancer"
+                ]
+              }
+            },
+            {
+              "title": "Practical Labs",
+              "description": "Practice your web security skills with these hands-on labs and challenges.",
+              "resources": [
+                {
+                  "title": "PortSwigger Web Security Academy - All Labs",
+                  "link": "https://portswigger.net/web-security/all-labs"
+                },
+                {
+                  "title": "HackTheBox Challenges",
+                  "link": "https://app.hackthebox.com/challenges"
+                },
+                {
+                  "title": "Root-Me Challenges",
+                  "link": "https://www.root-me.org/en/Challenges/"
+                },
+                {
+                  "title": "FahemSec",
+                  "link": "https://fahemsec.com/"
+                },
+                {
+                  "title": "Check CVEs Labs on TryHackMe",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "Check Intigriti XSS Challenges",
+                  "link": "https://bugology.intigriti.io/intigriti-monthly-challenges/"
+                },
+                {
+                  "title": "YesWeHack",
+                  "link": "https://www.yeswehack.com/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "binary_exploitation",
+      "paths": {
+        "common": {
+          "stages": [
+            {
+              "title": "Programming & Assembly",
+              "description": "Master programming and assembly for exploit development.",
+              "resources": {
+                "book": [
+                  {
+                    "title": "C/C++ and low-level exploitation foundations",
+                    "link": "https://drive.google.com/file/d/1n7_-TaU8I0lwR_HK2vh3SYNcBO2bnz8a/view?usp=sharing"
+                  }
+                ],
+                "visual_and_practice": [
+                  {
+                    "title": "pwn.college program-security",
+                    "link": "https://pwn.college/program-security/program-security/"
+                  },
+                  {
+                    "title": "pwn.college assembly-crash-course",
+                    "link": "https://pwn.college/computing-101/assembly-crash-course/"
+                  },
+                  {
+                    "title": "pwn.college building-a-web-server",
+                    "link": "https://pwn.college/computing-101/building-a-web-server/"
+                  }
+                ]
+              },
+              "topics": {
+                "C/C++ Coding": [
+                  "Compilation & toolchain",
+                  "Process memory map",
+                  "Pointers & addresses",
+                  "Stack Frame & Calling Convention",
+                  "Automatic vs dynamic memory",
+                  "C string & buffer handling",
+                  "Function pointers & indirect calls",
+                  "Linking & dynamic libraries (PLT/GOT, static vs dynamic linking)",
+                  "Syscalls",
+                  "Concurrency basics (threads, race conditions)",
+                  "Common compiler/memory protections",
+                  "Debugging fundamentals"
+                ],
+                "Assembly": [
+                  "CPU architectures",
+                  "Registers",
+                  "Instruction types",
+                  "Addressing modes",
+                  "Endianness & byte ordering",
+                  "Stack mechanics",
+                  "Calling convention",
+                  "Control flow & branches",
+                  "Function prologues/epilogues",
+                  "Memory operands & loads/stores",
+                  "Syscalls / interrupt interface",
+                  "Inline assembly",
+                  "Disassembly & reading asm (bytes to instructions)",
+                  "Gadgets",
+                  "Shellcode fundamentals",
+                  "Tools & workflows (objdump, patchelf, readelf)"
+                ]
+              }
+            },
+            {
+              "title": "Userspace Memory Corruption",
+              "description": "Learn to find and analyze software vulnerabilities.",
+              "topics": {
+                "Stack Overview": [
+                  "Stack buffer overflow",
+                  "Off-by-one / off-by-null",
+                  "Saved RBP overwrite / frame-chain corruption (leave;ret)",
+                  "Return address pointer overwrite",
+                  "Format-string that reads stack",
+                  "Format-string that writes",
+                  "Integer Overflow/underflow",
+                  "Partial pointer overwrite under ASLR/PIE",
+                  "Return 2 Libc (ret2libc)",
+                  "Return-oriented programming (ROP)",
+                  "Sigreturn-oriented programming (SROP)",
+                  "Jump Oriented Programming (JOP)",
+                  "Overwrite GOT",
+                  "Race conditions / TOCTOU",
+                  "Stack pivot"
+                ],
+                "Heap Overview": [
+                  "Understand Heap chunk metadata",
+                  "Understand the different bins in Heap (tcache, fast, unsorted, small, large)",
+                  "Off-by-one into size field",
+                  "Tcache double-free",
+                  "Fastbin dup / Double free (non-tcache)",
+                  "__malloc_hook / __free_hook overwrite",
+                  "Use-After-Free (UAF)",
+                  "GOT/PLT overwrite via heap write",
+                  "Heap grooming / feng shui",
+                  "Allocator-mitigation bypass patterns",
+                  "Consolidation attacks",
+                  "Understand Houses Attacks",
+                  "Understand Mangling and De-Mangling",
+                  "Practical: Check how2heap repo on github"
+                ],
+                "File Struct Exploits": [
+                  "Understanding _IO_FILE internals",
+                  "Read from memory with FileStruct",
+                  "Write into memory with FileStruct",
+                  "File stream vtable overwrite",
+                  "File Stream Oriented Programming (FSOP)",
+                  "Overwriting stdout/stderr internals"
+                ],
+                "Mitigations": [
+                  "NX / W^X",
+                  "Position-Independent Executable (PIE)",
+                  "Address Space Layout Randomization (ASLR)",
+                  "Full RELRO",
+                  "Stack Canary",
+                  "Safe Linking (Heap)"
+                ]
+              },
+              "resources": [
+                {
+                  "title": "pwn.college return-oriented-programming",
+                  "link": "https://pwn.college/program-security/return-oriented-programming/"
+                },
+                {
+                  "title": "pwn.college dynamic-allocator-misuse",
+                  "link": "https://pwn.college/program-security/dynamic-allocator-misuse/"
+                },
+                {
+                  "title": "pwn.college dynamic-allocator-exploitation",
+                  "link": "https://pwn.college/cse494-s2023/dynamic-allocator-exploitation"
+                },
+                {
+                  "title": "pwn.college file-struct-exploits",
+                  "link": "https://pwn.college/cse598-se-s2025/file-struct-exploits"
+                }
+              ]
+            },
+            {
+              "title": "Kernel Vulnerabilities",
+              "description": "Kernel vulnerabilities and exploitation.",
+              "topics": [
+                "Arbitrary kernel write",
+                "Arbitrary kernel read",
+                "Use-After-Free (kernel UAF)",
+                "Double-free (kernel UAF)",
+                "Stack buffer overflow (kernel stack)",
+                "Improper copy_from_user / copy_to_user usage",
+                "Race conditions / TOCTOU",
+                "IOCTL input validation flaws",
+                "Kernel ROP",
+                "Binder / IPC / ioctl path flaws",
+                "Hypervisor / virtualization interface flaws (escape VMs)",
+                "Kernel Debugging"
+              ],
+              "resources": [
+                {
+                  "title": "pwn.college kernel-security",
+                  "link": "https://pwn.college/cse466-f2022/kernel-security"
+                },
+                {
+                  "title": "pwn.college kernel-exploitation",
+                  "link": "https://pwn.college/software-exploitation/kernel-exploitation/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "osint_misc",
+      "paths": {
+        "common": {
+          "stages": [
+            {
+              "title": "Introduction to OSINT",
+              "description": "Understand the fundamentals of Open Source Intelligence, including its types, process, and applications.",
+              "topics": {
+                "About OSINT": [
+                  "Open Source Intelligence (OSINT) involves gathering information from publicly available sources"
+                ],
+                "Active vs Passive Information Gathering": [
+                  "Scanning a host or interacting with a human to get information is active info gathering",
+                  "Getting information without the target knowing is passive, most commonly from public resources"
+                ],
+                "Usage of OSINT": [
+                  "Hunting / Doxxing / Information Gathering"
+                ],
+                "OSINT Process": [
+                  "Identify the data you have first",
+                  "Validate sources",
+                  "Search online for relevant data",
+                  "Analyze data and connect dots",
+                  "Repeat the process"
+                ],
+                "OSINT Types": [
+                  "GEOINT (Geospatial Intelligence)",
+                  "IMINT (Imagery Intelligence)",
+                  "SOCMINT (Social Media Intelligence)",
+                  "CYBINT (Cyber Intelligence)",
+                  "WEBINT (Web Intelligence)",
+                  "DOCINT (Documentary Intelligence)",
+                  "FININT (Financial Intelligence)",
+                  "TECHINT (Technical Intelligence)"
+                ]
+              }
+            },
+            {
+              "title": "Search Engines and Online Tools",
+              "topics": {
+                "Common Search Engines": [
+                  "Google",
+                  "Yandex",
+                  "Bing",
+                  "DuckDuckGo",
+                  "Baidu",
+                  "Wayback Machine",
+                  "Ahmia"
+                ],
+                "Specialized Search": [
+                  {
+                    "title": "Carrot2",
+                    "link": "https://search.carrot2.org/",
+                    "description": "Search results clustering engine"
+                  },
+                  {
+                    "title": "GrayHatWarfare",
+                    "link": "https://buckets.grayhatwarfare.com/",
+                    "description": "Search engine for open cloud storage buckets"
+                  }
+                ],
+                "Google Dorks": [
+                  "Advanced search techniques to get exact information using specific operators"
+                ],
+                "Online Assets Engines": [
+                  "Shodan",
+                  {
+                    "title": "Netlas",
+                    "link": "https://netlas.io/"
+                  },
+                  {
+                    "title": "FOFA",
+                    "link": "https://en.fofa.info/"
+                  },
+                  "Censys",
+                  "Whois",
+                  "SecurityTrails"
+                ],
+                "Wireless OSINT": [
+                  {
+                    "title": "wigle.net",
+                    "link": "https://wigle.net/",
+                    "description": "Find WIFI location and name"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "GEOINT (Geospatial Intelligence)",
+              "topics": {
+                "What is GEOINT About": [
+                  "Goal: Find location from an image",
+                  "GPS Coordinates",
+                  "Metadata can reveal info about place, camera model, etc.",
+                  "Maps and satellite imagery",
+                  "Buildings, roads, signs, environment features can reveal info about place"
+                ],
+                "Sources": [
+                  "Google Maps / Earth",
+                  "OpenStreetMap",
+                  "Satellite imagery (Sentinel, Landsat)",
+                  "Street View",
+                  "Flight / ship trackers",
+                  "GeoSpy AI tool"
+                ]
+              }
+            },
+            {
+              "title": "SOCMINT (Social Media Intelligence)",
+              "topics": {
+                "Sock Puppets": [
+                  "Understanding fake accounts used for intelligence gathering"
+                ],
+                "Advanced Search in Social Media": [
+                  "Searching by username and username combinations",
+                  {
+                    "title": "instantusername.com",
+                    "link": "https://instantusername.com/"
+                  },
+                  {
+                    "title": "Sherlock",
+                    "link": "https://github.com/sherlock-project/sherlock"
+                  },
+                  {
+                    "title": "WhatsMyName",
+                    "link": "https://whatsmynameapp.net/",
+                    "description": "Username enumeration"
+                  },
+                  {
+                    "title": "Maigret",
+                    "link": "https://github.com/krishpranav/maigret",
+                    "description": "Username search across multiple platforms"
+                  },
+                  {
+                    "title": "Snoop",
+                    "link": "https://github.com/AnkhCorp/Snoop",
+                    "description": "Username enumeration tool"
+                  },
+                  {
+                    "title": "IntelX",
+                    "link": "https://intelx.io/",
+                    "description": "Intelligence data search engine"
+                  },
+                  {
+                    "title": "Epieos email tool",
+                    "link": "https://tools.epieos.com/email.php",
+                    "description": "Getting info from email address"
+                  }
+                ],
+                "Common Platforms": [
+                  "Twitter / X",
+                  "Facebook",
+                  "Instagram",
+                  "TikTok",
+                  "Reddit",
+                  "Snapchat",
+                  "LinkedIn",
+                  "Telegram / Discord (public channels)"
+                ]
+              }
+            },
+            {
+              "title": "IMINT (Imagery Intelligence)",
+              "topics": {
+                "Getting Information About an Image": [
+                  "Visual content analysis",
+                  "EXIF data extraction",
+                  "Checking objects/signs/logos/reflections/shadows/angles",
+                  "Checking sources (social media, CCTV, newspaper, drone, satellite)"
+                ],
+                "Reverse Image Search": [
+                  "Yandex",
+                  "Google Images",
+                  "Google Lens",
+                  "TinEye",
+                  "Bing Reverse Image Search"
+                ],
+                "Video Analysis": [
+                  "Check frame by frame"
+                ]
+              }
+            },
+            {
+              "title": "Leaked Credentials",
+              "topics": {
+                "Sources for Leaked Credentials": [
+                  "Try Google Dorking",
+                  "Telegram Groups",
+                  "Check Pastebin data",
+                  {
+                    "title": "Have I Been Pwned",
+                    "link": "https://haveibeenpwned.com/"
+                  },
+                  {
+                    "title": "DeHashed",
+                    "link": "https://dehashed.com/"
+                  },
+                  {
+                    "title": "Leak-Lookup",
+                    "link": "https://leak-lookup.com/"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Domains Enumeration",
+              "topics": {
+                "Whois Lookup": [
+                  "Perform Whois lookup to gather domain registration information such as owner, registrar, and creation date"
+                ],
+                "Shodan Search": [
+                  "Use Shodan to search for internet-connected devices and services associated with the target domain"
+                ],
+                "Subdomain Enumeration": [
+                  "Discover subdomains using tools like Subfinder, Sublist3r, and verify active ones with httpx"
+                ],
+                "ASN-based Domain Discovery": [
+                  "Find ASN numbers for the target and search for other domains using the same ASN"
+                ],
+                "Favicon-based Search": [
+                  "Search for domains using favicon hashes or images to find related websites"
+                ],
+                "Footer Data Search": [
+                  "Use Google dorks to search for domains based on common footer information like copyright notices"
+                ],
+                "Acquired Companies Check": [
+                  "Research if the target company has acquired other companies and check their domains"
+                ]
+              }
+            },
+            {
+              "title": "Blockchain Intelligence",
+              "topics": {
+                "How Does Blockchain Work": [
+                  "Blockchain is a distributed ledger technology that records transactions across a network",
+                  "Each transaction is permanently recorded and publicly accessible",
+                  "Blockchain intelligence helps trace cryptocurrency transactions and identify wallet owners"
+                ],
+                "What is a Wallet": [
+                  "A wallet is a digital address that holds cryptocurrency",
+                  "Wallets can be identified by their unique public addresses",
+                  "Analyzing wallet activity can reveal transaction patterns and connections"
+                ],
+                "What is a Transaction Number": [
+                  "Transaction hash (TxID) is a unique identifier for each blockchain transaction",
+                  "Allows tracking of funds from sender to receiver",
+                  "Can reveal transaction amount, timestamp, and involved addresses"
+                ],
+                "Blockchain Analysis Tools": [
+                  {
+                    "title": "Etherscan",
+                    "link": "https://etherscan.io/",
+                    "description": "Ethereum blockchain explorer"
+                  },
+                  {
+                    "title": "Blockchain.com Explorer",
+                    "link": "https://www.blockchain.com/explorer",
+                    "description": "Bitcoin and cryptocurrency explorer"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "APT Groups and Ransomware Tracking",
+              "topics": {
+                "Understanding APT Groups": [
+                  "Advanced Persistent Threats (APTs) are sophisticated, organized cyber threat actors",
+                  "Often state-sponsored or well-funded criminal organizations",
+                  "Understanding APT tactics, techniques, and procedures (TTPs) helps in threat intelligence"
+                ],
+                "Ransomware Tracking Platforms": [
+                  {
+                    "title": "RansomLook",
+                    "link": "https://www.ransomlook.io/",
+                    "description": "Ransomware tracking and intelligence"
+                  },
+                  {
+                    "title": "Ransomware.live",
+                    "link": "https://www.ransomware.live/",
+                    "description": "Real-time ransomware tracking platform"
+                  },
+                  {
+                    "title": "Malpedia",
+                    "link": "https://malpedia.caad.fkie.fraunhofer.de/",
+                    "description": "Malware and threat actor encyclopedia"
+                  },
+                  {
+                    "title": "Open Source Malware",
+                    "link": "https://opensourcemalware.com/",
+                    "description": "Malware research and analysis"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Resources & Thanks",
+              "resources": [
+                {
+                  "title": "OSINT Framework",
+                  "link": "https://osintframework.com/"
+                },
+                {
+                  "title": "Aware Online - OSINT Tools",
+                  "link": "https://www.aware-online.com/en/osint-tools/photo-and-video-tools/"
+                },
+                {
+                  "title": "OSINT Dojo",
+                  "link": "http://osintdojo.com/"
+                },
+                {
+                  "title": "OSINT Curio",
+                  "link": "http://osintcurio.us/"
+                },
+                {
+                  "title": "OSINT CTF Beginner Roadmap",
+                  "link": "https://xelessaway.medium.com/osint-ctf-beginner-roadmap-191d1601e48d"
+                },
+                {
+                  "title": "DrVirus OSINT Challenges Writeups",
+                  "link": "https://drv1us.medium.com/"
+                },
+                {
+                  "title": "Awesome OSINT For Everything",
+                  "link": "https://github.com/Astrosp/Awesome-OSINT-For-Everything"
+                }
+              ],
+              "acknowledgments": [
+                {
+                  "title": "Ahmed Elessawy",
+                  "link": "https://eg.linkedin.com/in/ahmedelessaway",
+                  "note": "Thanks for helping bring this to the community"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

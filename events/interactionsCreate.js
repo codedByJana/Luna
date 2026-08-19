@@ -2,6 +2,7 @@ const { Events } = require('discord.js');
 const quizHandler = require('../handlers/quizHandler');
 const taskHandler = require('../handlers/taskHandler');
 
+
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction, client) {
@@ -41,7 +42,8 @@ module.exports = {
         }
       } catch (error) {
         console.error('Interaction Handler Error:', error);
-
+        const handled = await handleRoadmapNavigation(interaction);
+        if (handled) return;
         // Attempt to notify the user without crashing
         const errorMessage = { content: 'There was an error processing this menu!', ephemeral: true };
         if (interaction.deferred || interaction.replied) {
