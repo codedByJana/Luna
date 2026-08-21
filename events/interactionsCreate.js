@@ -17,7 +17,11 @@ module.exports = {
         await interaction.reply({ content: 'There was an error!', ephemeral: true });
       }
     }
-
+    if (interaction.customId === 'register_event') {
+      const eventId = interaction.values[0];
+      db.registerUser(interaction.user.id, eventId);
+      await interaction.update({ content: 'You are registered. Don’t ghost!', components: [] });
+    }
     // Buttons & Select Menus
     if (interaction.isButton() || interaction.isStringSelectMenu()) {
       // Rules acceptance

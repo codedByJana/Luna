@@ -90,6 +90,54 @@ async function getAllUsers() {
   await connectToDatabase();
   return User.find().lean();
 }
+db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    userId TEXT PRIMARY KEY,
+    category TEXT,
+    learnerType TEXT,
+    points INTEGER DEFAULT 0,
+    consistentDays INTEGER DEFAULT 0,
+    missedDays INTEGER DEFAULT 0,
+    lastTaskDate TEXT,
+    rank TEXT DEFAULT 'puppy'
+  );
+
+  CREATE TABLE IF NOT EXISTS ctf_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    date TEXT,
+    status TEXT DEFAULT 'open', -- open | closed
+    createdBy TEXT
+  );
+
+  CREATE TABLE IF NOT EXISTS registrations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userId TEXT NOT NULL,
+    eventId INTEGER NOT NULL,
+    status TEXT DEFAULT 'registered', -- registered | present | ghosted
+    registeredAt TEXT,
+    UNIQUE(userId, eventId)
+  );
+`);
+
+getAllActiveUsers() {
+  return db.prepare(`SELECT * FROM users WHERE category IS NOT NULL`).all();
+},
+
+getOpenEvents() {
+  return db.prepare(`SELECT * FROM ctf_events WHERE status = 'open'`).all();
+},
+
+registerUser(userId, eventId) {
+  return db.prepare(`
+    INSERT OR IGNORE INTO registrations (userId, eventId, status, registeredAt)
+    VALUES (?, ?, 'registered', ?)
+  `).run(userId, eventId, new Date().toISOString());
+},
+
+getRegistrations(eventId) {
+  return db.prepare(`SELECT * FROM registrations WHERE eventId = ?`).all(eventId);
+}
 
 module.exports = {
   getUser,
