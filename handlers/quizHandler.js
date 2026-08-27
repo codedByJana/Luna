@@ -8,7 +8,7 @@ const {
 
 const config = require('../config');
 const db = require('../utils/database');
-const roadmaps = require('../embeds/roadmaps'); 
+const roadmaps = require('../embeds/roadmaps');
 
 // ========== START QUIZ ==========
 async function startQuiz(interaction) {
@@ -118,12 +118,12 @@ async function handleLearnerTypeSelect(interaction) {
       .setStyle(ButtonStyle.Secondary)
   );
 
+  const payload = getRoadmapEmbed(user.category, user.learnerType, 0);
+
   await interaction.editReply({
-    content: learnerType === 'both'
-      ? `Here are **both** roadmaps for **${category.toUpperCase()}**:`
-      : `Here is your personalized roadmap:`,
-    embeds: embedsToSend,
-    components: learnerType === 'both' ? [] : [buttonRow]
+    content: `Your personalized roadmap for **${user.category}**:`,
+    embeds: payload.embeds,
+    components: payload.components
   });
 }
 

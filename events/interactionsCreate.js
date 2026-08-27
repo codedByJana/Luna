@@ -20,7 +20,7 @@ module.exports = {
     if (interaction.customId === 'register_event') {
       const eventId = interaction.values[0];
       db.registerUser(interaction.user.id, eventId);
-      await interaction.update({ content: 'You are registered. Don’t ghost!', components: [] });
+      await interaction.update({ content: 'You are registered!!', components: [] });
     }
     // Buttons & Select Menus
     if (interaction.isButton() || interaction.isStringSelectMenu()) {

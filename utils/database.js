@@ -37,6 +37,46 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
+const eventSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  date: String,
+  status: {
+    type: String,
+    default: 'open',
+  },
+  createdBy: String,
+}, {
+  timestamps: true,
+});
+
+const Event = mongoose.models.Event || mongoose.model('Event', eventSchema);
+
+const registrationSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+  eventId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Event',
+  },
+  status: {
+    type: String,
+    default: 'registered',
+  },
+  registeredAt: {
+    type: Date,
+    default: Date.now,
+  },
+}, {
+  timestamps: true,
+});
+
+const Registration = mongoose.models.Registration || mongoose.model('Registration', registrationSchema);
+
 let connectionPromise = null;
 
 async function connectToDatabase() {
@@ -90,57 +130,49 @@ async function getAllUsers() {
   await connectToDatabase();
   return User.find().lean();
 }
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    userId TEXT PRIMARY KEY,
-    category TEXT,
-    learnerType TEXT,
-    points INTEGER DEFAULT 0,
-    consistentDays INTEGER DEFAULT 0,
-    missedDays INTEGER DEFAULT 0,
-    lastTaskDate TEXT,
-    rank TEXT DEFAULT 'puppy'
-  );
 
-  CREATE TABLE IF NOT EXISTS ctf_events (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    date TEXT,
-    status TEXT DEFAULT 'open', -- open | closed
-    createdBy TEXT
-  );
-
-  CREATE TABLE IF NOT EXISTS registrations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    userId TEXT NOT NULL,
-    eventId INTEGER NOT NULL,
-    status TEXT DEFAULT 'registered', -- registered | present | ghosted
-    registeredAt TEXT,
-    UNIQUE(userId, eventId)
-  );
-`);
-
-getAllActiveUsers() {
-  return db.prepare(`SELECT * FROM users WHERE category IS NOT NULL`).all();
-},
-
-getOpenEvents() {
-  return db.prepare(`SELECT * FROM ctf_events WHERE status = 'open'`).all();
-},
-
-registerUser(userId, eventId) {
-  return db.prepare(`
-    INSERT OR IGNORE INTO registrations (userId, eventId, status, registeredAt)
-    VALUES (?, ?, 'registered', ?)
-  `).run(userId, eventId, new Date().toISOString());
-},
-
-getRegistrations(eventId) {
-  return db.prepare(`SELECT * FROM registrations WHERE eventId = ?`).all(eventId);
+async function getAllActiveUsers() {
+  await connectToDatabase();
+  return User.find({ category: { $ne: null } }).lean();
 }
+
+async function getOpenEvents() {
+  await connectToDatabase();
+  return Event.find({ status: 'open' }).lean();
+}
+
+async function registerUser(userId, eventId) {
+  await connectToDatabase();
+
+  const eventObjectId = typeof eventId === 'string' ? eventId : eventId.toString();
+
+  return Registration.findOneAndUpdate(
+    { userId, eventId: eventObjectId },
+    {
+      userId,
+      eventId: eventObjectId,
+      status: 'registered',
+      registeredAt: new Date(),
+    },
+    { upsert: true, new: true }
+  ).lean();
+}
+
+async function getRegistrations(eventId) {
+  await connectToDatabase();
+
+  const eventObjectId = typeof eventId === 'string' ? eventId : eventId.toString();
+
+  return Registration.find({ eventId: eventObjectId }).populate('userId', 'userId category learnerType points rank').lean();
+}
+
 
 module.exports = {
   getUser,
   saveUser,
   getAllUsers,
+  getAllActiveUsers,
+  getOpenEvents,
+  registerUser,
+  getRegistrations,
 };

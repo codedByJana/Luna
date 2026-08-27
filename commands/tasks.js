@@ -6,16 +6,16 @@ async function createDailyTasks(userId, category, learningStyle) {
 }
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('tasks')
-    .setDescription('Show or manage your daily tasks'),
+  // data: new SlashCommandBuilder()
+  //   .setName('tasks')
+  //   .setDescription('Show or manage your daily tasks'),
 
-  async execute(interaction) {
-    await interaction.reply({
-      content: 'Task management is coming soon.',
-      ephemeral: true
-    });
-  },
+  // async execute(interaction) {
+  //   await interaction.reply({
+  //     content: 'Task management is coming soon.',
+  //     ephemeral: true
+  //   });
+  // },
 
-  createDailyTasks,
+  // createDailyTasks,
 };

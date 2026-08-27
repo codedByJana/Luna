@@ -2,7 +2,7 @@ const { Client, GatewayIntentBits, Collection, Partials } = require('discord.js'
 const fs = require('fs');
 const path = require('path');
 const config = require('./config');
-
+const taskHandler = require('./handlers/taskHandler');
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -13,6 +13,7 @@ const client = new Client({
   partials: [Partials.Channel, Partials.Message, Partials.GuildMember]
 });
 
+taskHandler.startCronJobs(client);
 client.commands = new Collection();
 
 // Load events
