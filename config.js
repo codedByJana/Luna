@@ -14,12 +14,12 @@ module.exports = {
     // Role IDs
     verifiedRoleId: '1096511622576607283',
     categoryRoles: {
-        web: '1534723540291424356',
-        crypto: '1534723585615335551',
-        forensics: '1534723782533447690',
-        re: '1534723660051644526',
-        pwn: '1534723716867559584',
-        osintANDmisc: '1534723840209453096',
+        Web: '1534723540291424356',
+        Cryptography: '1534723585615335551',
+        Forensics: '1534723782533447690',
+        Reverse: '1534723660051644526',
+        binary_exploitation: '1534723716867559584',
+        osint_misc: '1534723840209453096',
         // mobile: 'MOBILE_ROLE_ID',
         // networking: 'NETWORKING_ROLE_ID'
     },
