@@ -195,4 +195,5 @@ module.exports = {
   handleInteraction: handler,
   startQuiz,
   handleRoadmapNavigation,
+  browseRoadmaps,
 };
