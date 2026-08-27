@@ -2,13 +2,18 @@ const {
   ActionRowBuilder,
   StringSelectMenuBuilder,
   ButtonBuilder,
-  ButtonStyle,
-  EmbedBuilder
+  ButtonStyle
 } = require('discord.js');
 
 const config = require('../config');
 const db = require('../utils/database');
-const roadmaps = require('../embeds/roadmaps');
+const { getRoadmapEmbed } = require('../embeds/roadmaps');
+
+async function browseRoadmaps(interaction) {
+  // Routes to the start quiz menu as a fallback. 
+  // You can customize this later to show a static list.
+  return startQuiz(interaction);
+}
 
 // ========== START QUIZ ==========
 async function startQuiz(interaction) {
@@ -17,12 +22,12 @@ async function startQuiz(interaction) {
       .setCustomId('select_category')
       .setPlaceholder('Choose your CTF category')
       .addOptions([
-        { label: 'Web Exploitation', value: 'Web', emoji: '🕸️' },
-        { label: 'Cryptography', value: 'Cryptography', emoji: '🔑' },
-        { label: 'Forensics', value: 'Forensics', emoji: '🔍' },
-        { label: 'Reverse Engineering', value: 'Reverse', emoji: '🧩' },
-        { label: 'Binary Exploitation (Pwn)', value: 'binary_exploitation', emoji: '💣' },
-        { label: 'OSINT / Misc', value: 'osint_misc', emoji: '🌐' }
+        { label: 'Web Exploitation', value: 'Web' },
+        { label: 'Cryptography', value: 'Cryptography' },
+        { label: 'Forensics', value: 'Forensics' },
+        { label: 'Reverse Engineering', value: 'Reverse' },
+        { label: 'Binary Exploitation (Pwn)', value: 'binary_exploitation' },
+        { label: 'OSINT / Misc', value: 'osint_misc' }
       ])
   );
 
@@ -40,11 +45,8 @@ async function handleCategorySelect(interaction) {
   if (!category) return;
 
   const userId = interaction.user.id;
-
-  // Await database read
   const existing = await db.getUser(userId) || {};
 
-  // Await database write
   await db.saveUser({
     userId,
     category,
@@ -66,7 +68,6 @@ async function handleCategorySelect(interaction) {
 
   const row = new ActionRowBuilder().addComponents(
     new StringSelectMenuBuilder()
-      // Embed the category into the ID for the next step to catch
       .setCustomId(`select_learner_${category}`)
       .setPlaceholder('Choose your learning style')
       .addOptions([
@@ -90,11 +91,8 @@ async function handleLearnerTypeSelect(interaction) {
   if (!learnerType) return;
 
   const userId = interaction.user.id;
-
-  // Extract category securely from the customId instead of the database
   const category = interaction.customId.replace('select_learner_', '');
 
-  // Await database read/write
   const existing = await db.getUser(userId) || {};
   await db.saveUser({
     ...existing,
@@ -103,40 +101,41 @@ async function handleLearnerTypeSelect(interaction) {
   });
 
   let embedsToSend = [];
+  let componentsToSend = [];
   const initialPath = learnerType === 'both' ? 'book' : learnerType;
 
   if (learnerType === 'both') {
-    embedsToSend.push(getRoadmapEmbed(category, 'book'));
-    embedsToSend.push(getRoadmapEmbed(category, 'visual'));
-  } else {
-    const payload = getRoadmapEmbed(category, initialPath);
-    embedsToSend = payload.embeds;
-  }
-
-  const buttonRow = learnerType === 'both'
-    ? new ActionRowBuilder().addComponents(
+    const bookPayload = getRoadmapEmbed(category, 'book', 0);
+    const visualPayload = getRoadmapEmbed(category, 'visual', 0);
+    embedsToSend = [...bookPayload.embeds, ...visualPayload.embeds];
+    
+    componentsToSend = [
+      new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(`view_both_${category}`)
-          .setLabel('View Both Styles')
+          .setLabel('View Interactive Menus')
           .setStyle(ButtonStyle.Secondary)
       )
-    : null;
-
-  const payload = getRoadmapEmbed(category, initialPath, 0);
+    ];
+  } else {
+    const payload = getRoadmapEmbed(category, initialPath, 0);
+    embedsToSend = payload.embeds;
+    componentsToSend = payload.components;
+  }
 
   await interaction.editReply({
     content: `Your personalized roadmap for **${category}**:`,
-    embeds: learnerType === 'both' ? embedsToSend : payload.embeds,
-    components: learnerType === 'both' ? [buttonRow] : payload.components,
+    embeds: embedsToSend,
+    components: componentsToSend,
   });
 }
 
-const { getRoadmapEmbed } = require('../embeds/roadmaps');
-
+// ========== VIEW BOTH BUTTON ==========
 async function handleViewBoth(interaction) {
   const category = interaction.customId.replace('view_both_', '');
-  const book = getRoadmapEmbed(category, 'book');
-  const visual = getRoadmapEmbed(category, 'visual');
+  const book = getRoadmapEmbed(category, 'book', 0);
+  const visual = getRoadmapEmbed(category, 'visual', 0);
+  
   await interaction.update({
     content: `Both styles for **${category}**:`,
     embeds: [...book.embeds, ...visual.embeds],
@@ -144,15 +143,12 @@ async function handleViewBoth(interaction) {
   });
 }
 
+// ========== NAVIGATION BUTTONS ==========
 async function handleRoadmapNavigation(interaction) {
-  if (!interaction.isButton()) return false;
-
   const id = interaction.customId;
-  if (!id.startsWith('roadmap_')) return false;
-
-  // customId format: roadmap_next:web:book:0
   const [actionWithPrefix, category, path, indexStr] = id.split(':');
-  const action = actionWithPrefix.replace('roadmap_', ''); // next | prev | switch
+  const action = actionWithPrefix.replace('roadmap_', ''); 
+  
   let stageIndex = parseInt(indexStr, 10) || 0;
   let currentPath = path || 'book';
 
@@ -160,7 +156,6 @@ async function handleRoadmapNavigation(interaction) {
   if (action === 'prev') stageIndex -= 1;
   if (action === 'switch') {
     currentPath = currentPath === 'visual' ? 'book' : 'visual';
-    // keep same stage index when switching path
   }
 
   const payload = getRoadmapEmbed(category, currentPath, stageIndex);
@@ -169,8 +164,6 @@ async function handleRoadmapNavigation(interaction) {
     embeds: payload.embeds,
     components: payload.components
   });
-
-  return true;
 }
 
 // ========== MAIN HANDLER ==========
@@ -183,10 +176,14 @@ async function handler(interaction) {
       return handleLearnerTypeSelect(interaction);
     }
   }
-
+  
   if (interaction.isButton()) {
     if (interaction.customId.startsWith('view_both_')) {
       return handleViewBoth(interaction);
+    }
+    // Added routing for the Next/Prev/Switch buttons
+    if (interaction.customId.startsWith('roadmap_')) {
+      return handleRoadmapNavigation(interaction);
     }
   }
 }
