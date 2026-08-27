@@ -1,12 +1,11 @@
 const { Events } = require('discord.js');
 const quizHandler = require('../handlers/quizHandler');
 const taskHandler = require('../handlers/taskHandler');
-
+const db = require('../utils/database');
 
 module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction, client) {
-    // Slash commands
     if (interaction.isChatInputCommand()) {
       const command = client.commands.get(interaction.commandName);
       if (!command) return;
@@ -14,26 +13,48 @@ module.exports = {
         await command.execute(interaction, client);
       } catch (error) {
         console.error(error);
-        await interaction.reply({ content: 'There was an error!', ephemeral: true });
+        const payload = { content: 'There was an error executing that command!', ephemeral: true };
+        if (interaction.deferred || interaction.replied) {
+          await interaction.followUp(payload).catch(() => {});
+        } else {
+          await interaction.reply(payload).catch(() => {});
+        }
       }
+      return;
     }
-    if (interaction.customId === 'register_event') {
+
+    if (interaction.customId === 'register_event' && interaction.isStringSelectMenu()) {
       const eventId = interaction.values[0];
-      db.registerUser(interaction.user.id, eventId);
-      await interaction.update({ content: 'You are registered!!', components: [] });
+      try {
+        await db.registerUser(interaction.user.id, eventId);
+        await interaction.update({ content: '✅ You are registered for this CTF!', components: [] });
+      } catch (err) {
+        console.error('register_event failed:', err);
+        const payload = { content: 'Could not register you. Try again later.', ephemeral: true };
+        if (interaction.deferred || interaction.replied) {
+          await interaction.followUp(payload).catch(() => {});
+        } else {
+          await interaction.reply(payload).catch(() => {});
+        }
+      }
+      return;
     }
-    // Buttons & Select Menus
+
     if (interaction.isButton() || interaction.isStringSelectMenu()) {
-      // Rules acceptance
       if (interaction.customId === 'accept_rules') {
         const config = require('../config');
-        await interaction.member.roles.add(config.verifiedRoleId);
-        await interaction.reply({ content: 'Rules accepted! You now have access to the server.', ephemeral: true });
+        try {
+          await interaction.member.roles.add(config.verifiedRoleId);
+          await interaction.reply({ content: 'Rules accepted! You now have access to the server.', ephemeral: true });
+        } catch (err) {
+          console.error('accept_rules failed:', err);
+          await interaction.reply({ content: 'Could not verify you. Contact a mod.', ephemeral: true }).catch(() => {});
+        }
         return;
       }
 
       if (interaction.customId === 'decline_rules') {
-        await interaction.reply({ content: 'You must accept the rules to stay in the server.', ephemeral: true });
+        await interaction.reply({ content: 'You must accept the rules to stay in the server.', ephemeral: true }).catch(() => {});
         return;
       }
 
@@ -42,20 +63,22 @@ module.exports = {
           await quizHandler.handleInteraction(interaction);
         }
         if (taskHandler.handleInteraction) {
-          await taskHandler.handleInteraction(interaction);
+          const handled = await taskHandler.handleInteraction(interaction);
+          if (handled) return;
+        }
+        if (typeof quizHandler.handleRoadmapNavigation === 'function') {
+          const handled = await quizHandler.handleRoadmapNavigation(interaction);
+          if (handled) return;
         }
       } catch (error) {
         console.error('Interaction Handler Error:', error);
-        const handled = await handleRoadmapNavigation(interaction);
-        if (handled) return;
-        // Attempt to notify the user without crashing
         const errorMessage = { content: 'There was an error processing this menu!', ephemeral: true };
         if (interaction.deferred || interaction.replied) {
-          await interaction.followUp(errorMessage).catch(e => console.error(e));
+          await interaction.followUp(errorMessage).catch(() => {});
         } else {
-          await interaction.reply(errorMessage).catch(e => console.error(e));
+          await interaction.reply(errorMessage).catch(() => {});
         }
       }
     }
-  }
+  },
 };

@@ -103,31 +103,46 @@ async function handleLearnerTypeSelect(interaction) {
   });
 
   let embedsToSend = [];
+  const initialPath = learnerType === 'both' ? 'book' : learnerType;
 
   if (learnerType === 'both') {
-    embedsToSend.push(roadmaps.get(category, 'book'));
-    embedsToSend.push(roadmaps.get(category, 'visual'));
+    embedsToSend.push(getRoadmapEmbed(category, 'book'));
+    embedsToSend.push(getRoadmapEmbed(category, 'visual'));
   } else {
-    embedsToSend.push(roadmaps.get(category, learnerType));
+    const payload = getRoadmapEmbed(category, initialPath);
+    embedsToSend = payload.embeds;
   }
 
-  const buttonRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId(`view_both_${category}`)
-      .setLabel('View Both Styles')
-      .setStyle(ButtonStyle.Secondary)
-  );
+  const buttonRow = learnerType === 'both'
+    ? new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(`view_both_${category}`)
+          .setLabel('View Both Styles')
+          .setStyle(ButtonStyle.Secondary)
+      )
+    : null;
 
-  const payload = getRoadmapEmbed(user.category, user.learnerType, 0);
+  const payload = getRoadmapEmbed(category, initialPath, 0);
 
   await interaction.editReply({
-    content: `Your personalized roadmap for **${user.category}**:`,
-    embeds: payload.embeds,
-    components: payload.components
+    content: `Your personalized roadmap for **${category}**:`,
+    embeds: learnerType === 'both' ? embedsToSend : payload.embeds,
+    components: learnerType === 'both' ? [buttonRow] : payload.components,
   });
 }
 
 const { getRoadmapEmbed } = require('../embeds/roadmaps');
+
+async function handleViewBoth(interaction) {
+  const category = interaction.customId.replace('view_both_', '');
+  const book = getRoadmapEmbed(category, 'book');
+  const visual = getRoadmapEmbed(category, 'visual');
+  await interaction.update({
+    content: `Both styles for **${category}**:`,
+    embeds: [...book.embeds, ...visual.embeds],
+    components: [...book.components, ...visual.components],
+  });
+}
 
 async function handleRoadmapNavigation(interaction) {
   if (!interaction.isButton()) return false;
@@ -158,15 +173,12 @@ async function handleRoadmapNavigation(interaction) {
   return true;
 }
 
-module.exports = { handleRoadmapNavigation };
-
 // ========== MAIN HANDLER ==========
 async function handler(interaction) {
   if (interaction.isStringSelectMenu()) {
     if (interaction.customId === 'select_category') {
       return handleCategorySelect(interaction);
     }
-    // Update this line to catch the dynamic ID containing the category
     if (interaction.customId.startsWith('select_learner_')) {
       return handleLearnerTypeSelect(interaction);
     }
@@ -181,5 +193,6 @@ async function handler(interaction) {
 
 module.exports = {
   handleInteraction: handler,
-  startQuiz
+  startQuiz,
+  handleRoadmapNavigation,
 };

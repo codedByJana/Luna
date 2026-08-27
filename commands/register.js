@@ -7,8 +7,8 @@ module.exports = {
     .setDescription('Register for an open CTF event'),
 
   async execute(interaction) {
-    const events = db.getOpenEvents();
-    if (events.length === 0) {
+    const events = await db.getOpenEvents();
+    if (!events || events.length === 0) {
       return interaction.reply({ content: 'No open CTFs right now.', ephemeral: true });
     }
 
@@ -17,9 +17,9 @@ module.exports = {
       .setPlaceholder('Choose a CTF to register for')
       .addOptions(
         events.map(e => ({
-          label: e.name,
-          description: e.date || 'No date set',
-          value: String(e.id)
+          label: e.name.slice(0, 100),
+          description: (e.date || 'No date set').slice(0, 100),
+          value: String(e._id)
         }))
       );
 
@@ -30,5 +30,5 @@ module.exports = {
       components: [row],
       ephemeral: true
     });
-  }
+  },
 };

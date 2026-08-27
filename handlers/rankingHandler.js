@@ -2,19 +2,20 @@ const { EmbedBuilder } = require('discord.js');
 const db = require('../utils/database');
 const config = require('../config');
 
-// Rank thresholds
-const RANKS = {
-  puppy: { min: 0, max: 5, label: 'Puppy', emoji: '🐶' },
-  underdog: { min: 6, max: 10, label: 'Underdog', emoji: '🐺' },
-  wolf: { min: 11, max: Infinity, label: 'Wolf', emoji: '🐺🔥' }
+const POINTS = {
+  PUPPY_TO_UNDERDOG: 15,
+  UNDERDOG_TO_WOLF: 30,
 };
 
-/**
- * Get rank name from points
- */
+const RANKS = {
+  puppy: { min: 0, max: POINTS.PUPPY_TO_UNDERDOG - 1, label: 'Puppy', emoji: '🐶' },
+  underdog: { min: POINTS.PUPPY_TO_UNDERDOG, max: POINTS.UNDERDOG_TO_WOLF - 1, label: 'Underdog', emoji: '🐺' },
+  wolf: { min: POINTS.UNDERDOG_TO_WOLF, max: Infinity, label: 'Wolf', emoji: '🐺🔥' }
+};
+
 function getRankFromPoints(points) {
-  if (points >= 11) return 'wolf';
-  if (points >= 6) return 'underdog';
+  if (points >= POINTS.UNDERDOG_TO_WOLF) return 'wolf';
+  if (points >= POINTS.PUPPY_TO_UNDERDOG) return 'underdog';
   return 'puppy';
 }
 
@@ -127,7 +128,7 @@ function getRankEmbed(user, member) {
     .addFields(
       { name: 'Current Rank', value: `**${rankInfo.label}**`, inline: true },
       { name: 'Points', value: `**${user.points || 0}**`, inline: true },
-      { name: 'Consistent Days', value: `${user.consistentDays || 0}/5`, inline: true }
+      { name: 'Missed Days', value: `${user.missedDays || 0}`, inline: true }
     )
     .setFooter({ text: 'Underdogs Pack' })
     .setTimestamp();

@@ -3,7 +3,7 @@ require('dotenv').config();
 module.exports = {
     token: process.env.TOKEN,
     clientId: process.env.CLIENT_ID,
-    guildId: process.env.GUILD_ID, // Your server ID
+    guildId: process.env.GUILD_ID, 
 
     // Channel IDs
     welcomeChannelId: '1532502240450056485',
