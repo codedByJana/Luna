@@ -143,29 +143,6 @@ async function handleViewBoth(interaction) {
   });
 }
 
-// ========== NAVIGATION BUTTONS ==========
-async function handleRoadmapNavigation(interaction) {
-  const id = interaction.customId;
-  const [actionWithPrefix, category, path, indexStr] = id.split(':');
-  const action = actionWithPrefix.replace('roadmap_', ''); 
-  
-  let stageIndex = parseInt(indexStr, 10) || 0;
-  let currentPath = path || 'book';
-
-  if (action === 'next') stageIndex += 1;
-  if (action === 'prev') stageIndex -= 1;
-  if (action === 'switch') {
-    currentPath = currentPath === 'visual' ? 'book' : 'visual';
-  }
-
-  const payload = getRoadmapEmbed(category, currentPath, stageIndex);
-
-  await interaction.update({
-    embeds: payload.embeds,
-    components: payload.components
-  });
-}
-
 // ========== MAIN HANDLER ==========
 async function handler(interaction) {
   if (interaction.isStringSelectMenu()) {
