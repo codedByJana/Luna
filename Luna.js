@@ -8,13 +8,19 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,      // Required for welcome + roles
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions, // For ✅ completion tracking
     GatewayIntentBits.MessageContent, // TO-DO: investigate the need for this permission
   ],
-  partials: [Partials.Channel, Partials.Message, Partials.GuildMember]
+  partials: [Partials.Channel, Partials.Message, Partials.GuildMember, Partials.Reaction, Partials.User]
 });
 
 taskHandler.startCronJobs(client);
 client.commands = new Collection();
+
+// C. Tracking completion via ✅ reaction
+client.on('messageReactionAdd', async (reaction, user) => {
+  await taskHandler.handleReactionAdd(reaction, user, client);
+});
 
 // Load events
 const eventsPath = path.join(__dirname, 'events');

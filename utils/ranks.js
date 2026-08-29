@@ -1,14 +1,22 @@
 const config = require('../config');
 
 const RANK_THRESHOLDS = {
-  puppy: { min: 0, max: 5 },
-  underdog: { min: 6, max: 10 },
-  wolf: { min: 11, max: Infinity }
+  puppy: { min: 0, max: 14 },
+  underdog: { min: 15, max: 29 },
+  wolf: { min: 30, max: Infinity }
+};
+
+const POINTS = {
+  COMPLETE_BONUS: 1,
+  MISS_PENALTY: 5,
+  PUPPY_TO_UNDERDOG: 15,
+  UNDERDOG_TO_WOLF: 30,
+  PUPPY_BAN_THRESHOLD: 3,
 };
 
 function getRankFromPoints(points) {
-  if (points >= 11) return 'wolf';
-  if (points >= 6) return 'underdog';
+  if (points >= POINTS.UNDERDOG_TO_WOLF) return 'wolf';
+  if (points >= POINTS.PUPPY_TO_UNDERDOG) return 'underdog';
   return 'puppy';
 }
 
@@ -34,5 +42,6 @@ async function updateRank(member, newPoints) {
 module.exports = {
   getRankFromPoints,
   updateRank,
-  RANK_THRESHOLDS
+  RANK_THRESHOLDS,
+  POINTS
 };

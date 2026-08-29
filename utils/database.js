@@ -5,6 +5,16 @@ dotenv.config();
 
 const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/Luna';
 
+// A. Stored schedule — SQL reference kept for docs (MongoDB compatible via mongoose):
+// CREATE TABLE IF NOT EXISTS task_templates (
+//   id INTEGER PRIMARY KEY AUTOINCREMENT,
+//   category TEXT NOT NULL,
+//   learner_type TEXT NOT NULL, -- 'book' or 'visual'
+//   task_text TEXT NOT NULL,
+//   active INTEGER DEFAULT 1
+// );
+// Mongo TaskTemplate below is the production implementation.
+
 const userSchema = new mongoose.Schema({
   userId: {
     type: String,
@@ -17,7 +27,7 @@ const userSchema = new mongoose.Schema({
   points: { type: Number, default: 0 },
   consistentDays: { type: Number, default: 0 },
   missedDays: { type: Number, default: 0 },
-  lastTaskDate: { type: String, default: null },
+  lastTaskDate: { type: String, default: null }, // YYYY-MM-DD, C. Tracking completion
   rank: { type: String, default: 'puppy' },
 }, { timestamps: true });
 
@@ -118,6 +128,7 @@ async function getAllUsers() {
 
 async function getAllActiveUsers() {
   await connectToDatabase();
+  // Users who finished the quiz — category must be set (learnerType may fallback to 'book')
   return User.find({ category: { $ne: null } }).lean();
 }
 

@@ -1,5 +1,5 @@
 const db = require('../utils/database');
-const { allTemplates } = require('../tasks');
+const { allTemplates } = require('../commands/tasks');
 
 async function main() {
   await db.connectToDatabase();
