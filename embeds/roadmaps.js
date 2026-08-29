@@ -2,21 +2,21 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const curriculum = require('../ctf_curriculum_roadmap.json');
 
 const CATEGORY_MAP = {
-    web: 'web',
-    crypto: 'crypto',
-    forensics: 'forensics',
-    re: 'reverse_engineering',
-    pwn: 'binary_exploitation',
-    osint: 'osint_misc'
+    Web: 'Web',
+    Cryptography: 'Cryptography',
+    Forensics: 'Forensics',
+    Reverse: 'Reverse',
+    binary_exploitation: 'binary_exploitation',
+    osint_misc: 'osint_misc',
 };
 
 const CATEGORY_TITLE = {
-    web: 'Web Exploitation',
-    crypto: 'Cryptography',
-    forensics: 'Digital Forensics',
-    re: 'Reverse Engineering',
-    pwn: 'Binary Exploitation',
-    osint: 'OSINT & Misc'
+    Web: 'Web Exploitation',
+    Cryptography: 'Cryptography',
+    Forensics: 'Digital Forensics',
+    Reverse: 'Reverse Engineering',
+    binary_exploitation: 'Binary Exploitation',
+    osint_misc: 'OSINT & Misc',
 };
 
 /**
@@ -126,7 +126,7 @@ function normalizeTopics(topics) {
 
 /**
  * Main function
- * @param {string} category bot category: web|crypto|forensics|re|pwn|osint
+ * @param {string} category canonical: Web | Cryptography | Forensics | Reverse | binary_exploitation | osint_misc
  * @param {string} path 'book' | 'visual'
  * @param {number} stageIndex
  * @returns {{ embeds: EmbedBuilder[], components: ActionRowBuilder[], meta: object }}
