@@ -108,7 +108,7 @@ async function handleLearnerTypeSelect(interaction) {
     const bookPayload = getRoadmapEmbed(category, 'book', 0);
     const visualPayload = getRoadmapEmbed(category, 'visual', 0);
     embedsToSend = [...bookPayload.embeds, ...visualPayload.embeds];
-
+    
     componentsToSend = [
       new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -135,11 +135,38 @@ async function handleViewBoth(interaction) {
   const category = interaction.customId.replace('view_both_', '');
   const book = getRoadmapEmbed(category, 'book', 0);
   const visual = getRoadmapEmbed(category, 'visual', 0);
-
+  
   await interaction.update({
     content: `Both styles for **${category}**:`,
     embeds: [...book.embeds, ...visual.embeds],
     components: [...book.components, ...visual.components],
+  });
+}
+
+// ========== NAVIGATION BUTTONS ==========
+async function handleRoadmapNavigation(interaction) {
+  // Guard clauses to prevent processing unintended interactions
+  if (!interaction.isButton()) return;
+  if (!interaction.customId.startsWith('roadmap_')) return;
+
+  const id = interaction.customId;
+  const [actionWithPrefix, category, path, indexStr] = id.split(':');
+  const action = actionWithPrefix.replace('roadmap_', ''); 
+  
+  let stageIndex = parseInt(indexStr, 10) || 0;
+  let currentPath = path || 'book';
+
+  if (action === 'next') stageIndex += 1;
+  if (action === 'prev') stageIndex -= 1;
+  if (action === 'switch') {
+    currentPath = currentPath === 'visual' ? 'book' : 'visual';
+  }
+
+  const payload = getRoadmapEmbed(category, currentPath, stageIndex);
+
+  await interaction.update({
+    embeds: payload.embeds,
+    components: payload.components
   });
 }
 
@@ -153,10 +180,13 @@ async function handler(interaction) {
       return handleLearnerTypeSelect(interaction);
     }
   }
-
+  
   if (interaction.isButton()) {
     if (interaction.customId.startsWith('view_both_')) {
       return handleViewBoth(interaction);
+    }
+    if (interaction.customId.startsWith('roadmap_')) {
+      return handleRoadmapNavigation(interaction);
     }
   }
 }
@@ -164,5 +194,6 @@ async function handler(interaction) {
 module.exports = {
   handleInteraction: handler,
   startQuiz,
+  handleRoadmapNavigation,
   browseRoadmaps,
 };
