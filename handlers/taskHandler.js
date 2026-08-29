@@ -42,12 +42,18 @@ function pickDaily(tasks, today) {
   return out;
 }
 
+function normalizeTaskCategory(input) {
+  if (!input || typeof input !== 'string') return null;
+  return String(input).trim().toLowerCase();
+}
+
 async function getTasksForUser(user) {
   const learnerType = user.learnerType === 'visual' ? 'visual' : 'book';
+  const normalizedCategory = normalizeTaskCategory(user.category) || String(user.category || '').toLowerCase();
   // B. Daily posting: pick tasks from their category + learnerType
-  const all = await db.getTaskTemplates(user.category, learnerType);
+  const all = await db.getTaskTemplates(normalizedCategory, learnerType);
   const fallback = await db.getTaskTemplates(
-    user.category,
+    normalizedCategory,
     learnerType === 'book' ? 'visual' : 'book'
   );
   const merged = [...all, ...fallback.filter(f => !all.some(a => a.taskText === f.taskText))];

@@ -1,23 +1,42 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const curriculum = require('../ctf_curriculum_roadmap.json');
 
+// Unified canonical values - variables capitalized first letter, values lower case - 6 categories persistent
 const CATEGORY_MAP = {
-    Web: 'Web',
-    Cryptography: 'Cryptography',
-    Forensics: 'Forensics',
-    Reverse: 'Reverse',
-    binary_exploitation: 'binary_exploitation',
-    osint_misc: 'osint_misc',
+    Web: 'web',
+    Cryptography: 'cryptography',
+    Reverse: 'reverse',
+    Binary_exploitation: 'binary_exploitation',
+    Forensics: 'forensics',
+    Osint_misc: 'osint_misc',
 };
 
 const CATEGORY_TITLE = {
-    Web: 'Web Exploitation',
+    Web: 'Web',
     Cryptography: 'Cryptography',
-    Forensics: 'Digital Forensics',
     Reverse: 'Reverse Engineering',
-    binary_exploitation: 'Binary Exploitation',
-    osint_misc: 'OSINT & Misc',
+    Binary_exploitation: 'Binary Exploitation(Pwn)',
+    Forensics: 'Forensics',
+    Osint_misc: 'Osint and Misc',
 };
+
+// Helper to normalize category to lower canonical value (unified)
+function normalizeCategory(input) {
+    if (!input || typeof input !== 'string') return null;
+    return String(input).trim().toLowerCase();
+}
+
+function getCanonicalKey(lowerValue) {
+    const mapLowerToKey = {
+        'web': 'Web',
+        'cryptography': 'Cryptography',
+        'forensics': 'Forensics',
+        'reverse': 'Reverse',
+        'binary_exploitation': 'Binary_exploitation',
+        'osint_misc': 'Osint_misc',
+    };
+    return mapLowerToKey[lowerValue] || lowerValue;
+}
 
 /**
  * Resolve which path object to use
@@ -132,8 +151,11 @@ function normalizeTopics(topics) {
  * @returns {{ embeds: EmbedBuilder[], components: ActionRowBuilder[], meta: object }}
  */
 function getRoadmapEmbed(category, path = 'book', stageIndex = 0) {
-    const jsonCategory = CATEGORY_MAP[category];
-    const title = CATEGORY_TITLE[category] || category;
+    // Normalize to lower canonical value (web, cryptography, etc.) - handles legacy Web/Crypto aliases
+    const lower = normalizeCategory(category) || String(category).trim().toLowerCase();
+    const canonicalKey = getCanonicalKey(lower);
+    const jsonCategory = lower;
+    const title = CATEGORY_TITLE[canonicalKey] || CATEGORY_TITLE[category] || lower;
 
     const catData = curriculum.categories.find(c => c.category === jsonCategory);
 
@@ -143,10 +165,10 @@ function getRoadmapEmbed(category, path = 'book', stageIndex = 0) {
                 new EmbedBuilder()
                     .setColor(0xff0000)
                     .setTitle('Roadmap not found')
-                    .setDescription(`No curriculum for **${category}**.`)
+                    .setDescription(`No curriculum for **${category}** (normalized: **${lower}**).`)
             ],
             components: [],
-            meta: { category, path, stageIndex, totalStages: 0 }
+            meta: { category: lower, path, stageIndex, totalStages: 0 }
         };
     }
 
@@ -160,7 +182,7 @@ function getRoadmapEmbed(category, path = 'book', stageIndex = 0) {
                     .setDescription('No path data found.')
             ],
             components: [],
-            meta: { category, path, stageIndex, totalStages: 0 }
+            meta: { category: lower, path, stageIndex, totalStages: 0 }
         };
     }
 
@@ -217,22 +239,23 @@ function getRoadmapEmbed(category, path = 'book', stageIndex = 0) {
         });
     }
 
-    // Navigation buttons
+    // Navigation buttons - use lower canonical value to keep routing consistent
+    const buttonCategory = lower;
     const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-            .setCustomId(`roadmap_prev:${category}:${path}:${safeIndex}`)
+            .setCustomId(`roadmap_prev:${buttonCategory}:${path}:${safeIndex}`)
             .setLabel('Previous')
             .setStyle(ButtonStyle.Secondary)
             .setDisabled(safeIndex <= 0),
 
         new ButtonBuilder()
-            .setCustomId(`roadmap_next:${category}:${path}:${safeIndex}`)
+            .setCustomId(`roadmap_next:${buttonCategory}:${path}:${safeIndex}`)
             .setLabel('Next Stage')
             .setStyle(ButtonStyle.Primary)
             .setDisabled(safeIndex >= stages.length - 1),
 
         new ButtonBuilder()
-            .setCustomId(`roadmap_switch:${category}:${path}:${safeIndex}`)
+            .setCustomId(`roadmap_switch:${buttonCategory}:${path}:${safeIndex}`)
             .setLabel(path === 'visual' ? 'Switch to Book Path' : 'Switch to Visual Path')
             .setStyle(ButtonStyle.Success)
     );
@@ -241,7 +264,7 @@ function getRoadmapEmbed(category, path = 'book', stageIndex = 0) {
         embeds: [embed],
         components: [row],
         meta: {
-            category,
+            category: lower,
             path: resolved.key === 'common' ? path : resolved.key,
             stageIndex: safeIndex,
             totalStages: stages.length

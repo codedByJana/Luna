@@ -8,7 +8,31 @@ const {
 
 const config = require('../config');
 const db = require('../utils/database');
+const ranking = require('./rankingHandler');
 const { getRoadmapEmbed } = require('../embeds/roadmaps');
+
+// Unified category handling - values lower case, variables capitalized first letter
+function normalizeCategory(input) {
+    if (!input || typeof input !== 'string') return null;
+    return String(input).trim().toLowerCase();
+}
+function getCanonicalKey(lowerValue) {
+    const map = {
+        'web': 'Web',
+        'cryptography': 'Cryptography',
+        'forensics': 'Forensics',
+        'reverse': 'Reverse',
+        'binary_exploitation': 'Binary_exploitation',
+        'osint_misc': 'Osint_misc',
+    };
+    return map[lowerValue] || lowerValue;
+}
+function getCategoryRoleId(categoryValue) {
+    if (!categoryValue) return null;
+    const lower = normalizeCategory(categoryValue);
+    const key = getCanonicalKey(lower);
+    return config.categoryRoles[key] || null;
+}
 
 async function browseRoadmaps(interaction) {
   // Routes to the start quiz menu as a fallback. 
@@ -23,12 +47,12 @@ async function startQuiz(interaction) {
       .setCustomId('select_category')
       .setPlaceholder('Choose your CTF category')
       .addOptions([
-        { label: 'Web Exploitation', value: 'Web' },
-        { label: 'Cryptography', value: 'Cryptography' },
-        { label: 'Forensics', value: 'Forensics' },
-        { label: 'Reverse Engineering', value: 'Reverse' },
-        { label: 'Binary Exploitation (Pwn)', value: 'binary_exploitation' },
-        { label: 'OSINT / Misc', value: 'osint_misc' }
+        { label: 'Web', value: 'web' },
+        { label: 'Cryptography', value: 'cryptography' },
+        { label: 'Reverse Engineering', value: 'reverse' },
+        { label: 'Binary Exploitation(Pwn)', value: 'binary_exploitation' },
+        { label: 'Forensics', value: 'forensics' },
+        { label: 'Osint and Misc', value: 'osint_misc' }
       ])
   );
 
@@ -42,29 +66,68 @@ async function startQuiz(interaction) {
 // ========== CATEGORY SELECT ==========
 async function handleCategorySelect(interaction) {
   await interaction.deferUpdate();
-  const category = interaction.values[0];
-  if (!category) return;
+  const rawCategory = interaction.values[0];
+  if (!rawCategory) return;
+  const category = normalizeCategory(rawCategory) || rawCategory;
 
   const userId = interaction.user.id;
-  const existing = await db.getUser(userId) || {};
+  const existingRaw = await db.getUser(userId) || {};
+  const existingCategory = normalizeCategory(existingRaw.category) || existingRaw.category;
+  const existing = { ...existingRaw, category: existingCategory };
 
-  await db.saveUser({
-    userId,
-    category,
-    learnerType: existing.learnerType || null,
-    points: existing.points || 0,
-    consistentDays: existing.consistentDays || 0,
-    lastTaskDate: existing.lastTaskDate || null,
-    rank: existing.rank || 'puppy'
-  });
+  const isFirstTake = !existing.category;
+  const isSameCategory = existing.category === category;
+  const isSwitch = existing.category && existing.category !== category;
+
+  let userData;
+  if (isFirstTake || isSwitch) {
+    // First take OR switching category -> assign new category and reset to puppy
+    // e.g. crypto -> Web ==> Web + puppy (points reset)
+    userData = {
+      userId,
+      category,
+      learnerType: existingRaw.learnerType || null,
+      points: 0,
+      consistentDays: 0,
+      missedDays: 0,
+      lastTaskDate: null,
+      rank: 'puppy'
+    };
+  } else if (isSameCategory) {
+    // Same category retake -> preserve scoring state (rank evolves via tasks)
+    userData = {
+      userId,
+      category,
+      learnerType: existingRaw.learnerType || null,
+      points: existingRaw.points ?? 0,
+      consistentDays: existingRaw.consistentDays ?? 0,
+      missedDays: existingRaw.missedDays ?? 0,
+      lastTaskDate: existingRaw.lastTaskDate ?? null,
+      rank: existingRaw.rank ?? 'puppy'
+    };
+  }
+
+  await db.saveUser(userData);
 
   try {
-    const roleId = config.categoryRoles[category];
-    if (roleId) {
-      await interaction.member.roles.add(roleId);
+    const newRoleId = getCategoryRoleId(category);
+    const oldRoleId = existing.category ? getCategoryRoleId(existing.category) : null;
+
+    // Add new category role (idempotent)
+    if (newRoleId && !interaction.member.roles.cache.has(newRoleId)) {
+      await interaction.member.roles.add(newRoleId);
+    }
+    // Remove old category role only when switching
+    if (isSwitch && oldRoleId && oldRoleId !== newRoleId) {
+      await interaction.member.roles.remove(oldRoleId).catch(() => {});
+    }
+
+    // Sync rank roles to puppy on first take or switch
+    if (isFirstTake || isSwitch) {
+      await ranking.updateMemberRank(interaction.member, 0).catch(() => {});
     }
   } catch (err) {
-    console.error('Failed to add category role:', err);
+    console.error('Failed to update category/rank roles:', err);
   }
 
   const row = new ActionRowBuilder().addComponents(
@@ -92,12 +155,16 @@ async function handleLearnerTypeSelect(interaction) {
   if (!learnerType) return;
 
   const userId = interaction.user.id;
-  const category = interaction.customId.replace('select_learner_', '');
+  const rawCategory = interaction.customId.replace('select_learner_', '');
+  const category = normalizeCategory(rawCategory) || rawCategory;
 
   const existing = await db.getUser(userId) || {};
+  // Ensure stored category is normalized (migrate legacy aliases)
+  const normalizedExistingCategory = normalizeCategory(existing.category) || existing.category;
   await db.saveUser({
     ...existing,
     userId,
+    category: normalizedExistingCategory || category,
     learnerType: learnerType === 'both' ? 'book' : learnerType
   });
 
@@ -133,7 +200,8 @@ async function handleLearnerTypeSelect(interaction) {
 
 // ========== VIEW BOTH BUTTON ==========
 async function handleViewBoth(interaction) {
-  const category = interaction.customId.replace('view_both_', '');
+  const rawCategory = interaction.customId.replace('view_both_', '');
+  const category = normalizeCategory(rawCategory) || rawCategory;
   const book = getRoadmapEmbed(category, 'book', 0);
   const visual = getRoadmapEmbed(category, 'visual', 0);
   
@@ -162,7 +230,8 @@ async function handleRoadmapNavigation(interaction) {
   if (interaction.replied || interaction.deferred) return true;
 
   const id = interaction.customId;
-  const [actionWithPrefix, category, path, indexStr] = id.split(':');
+  const [actionWithPrefix, rawCategory, path, indexStr] = id.split(':');
+  const category = normalizeCategory(rawCategory) || rawCategory;
   const action = actionWithPrefix.replace('roadmap_', ''); 
   
   let stageIndex = parseInt(indexStr, 10) || 0;

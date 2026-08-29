@@ -1,4 +1,4 @@
-const { MessageFlags } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 
 async function askLearningStyle(interaction) {
   const row = new ActionRowBuilder()
@@ -21,3 +21,5 @@ async function askLearningStyle(interaction) {
     flags: MessageFlags.Ephemeral
   });
 }
+
+module.exports = { askLearningStyle };

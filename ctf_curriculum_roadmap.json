@@ -1,635 +1,7 @@
 {
   "categories": [
     {
-      "category": "Cryptography",
-      "paths": {
-        "book": {
-          "stages": [
-            {
-              "title": "Study cryptographic concepts from Understanding Cryptography.",
-              "resources": [
-                {
-                  "title": "Understanding Cryptography",
-                  "type": "book",
-                  "link": "https://drive.google.com/file/d/11bywcNWGF-8NFLQPXGAC90_pbB4a3rMu/view?usp=sharing"
-                }
-              ]
-            },
-            {
-              "title": "Learn and apply concepts through CryptoHack Learn.",
-              "resources": [
-                {
-                  "title": "CryptoHack Learn",
-                  "type": "interactive_course",
-                  "link": "https://cryptohack.org/courses/"
-                }
-              ]
-            },
-            {
-              "title": "Practice cryptography challenges on CryptoHack.",
-              "resources": [
-                {
-                  "title": "CryptoHack Practice",
-                  "type": "practice",
-                  "link": "https://cryptohack.org/challenges/"
-                }
-              ]
-            }
-          ]
-        },
-        "visual": {
-          "stages": [
-            {
-              "title": "Learn cryptography concepts through CryptoHack and pwn.college material.",
-              "resources": [
-                {
-                  "title": "pwn.college",
-                  "type": "videos/course",
-                  "link": "https://pwn.college/"
-                },
-                {
-                  "title": "CryptoHack Learn",
-                  "type": "interactive_course",
-                  "link": "https://cryptohack.org/courses/"
-                }
-              ]
-            },
-            {
-              "title": "Apply concepts immediately through CryptoHack and pwn.college practice.",
-              "resources": [
-                {
-                  "title": "CryptoHack Practice",
-                  "type": "practice",
-                  "link": "https://cryptohack.org/challenges/"
-                },
-                {
-                  "title": "pwn.college Practice",
-                  "type": "practice",
-                  "link": "https://pwn.college/"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    },
-    {
-      "category": "Forensics",
-      "paths": {
-        "book": {
-          "stages": [
-            {
-              "title": "Foundations",
-              "description": "Methodology, Acquisition, Windows artifacts, Linux artifacts, Open-source tools",
-              "resources": [
-                {
-                  "title": "Fundamentals of Digital Forensics (Kävrestad, Birath, Clarke – 3rd ed.)",
-                  "type": "book",
-                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
-                }
-              ]
-            },
-            {
-              "title": "Disk Forensics",
-              "description": "File systems, Recovery, Registry, Timelines, Apply immediately",
-              "resources": [
-                {
-                  "title": "Fundamentals of Digital Forensics",
-                  "type": "book",
-                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
-                }
-              ]
-            },
-            {
-              "title": "Memory Forensics",
-              "description": "",
-              "resources": [
-                {
-                  "title": "Fundamentals of Digital Forensics",
-                  "type": "book",
-                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
-                },
-                {
-                  "title": "Volatility documentation/examples",
-                  "type": "documentation",
-                  "link": "https://volatility3.readthedocs.io/"
-                }
-              ]
-            },
-            {
-              "title": "Network Forensics",
-              "description": "Network forensics concepts, Wireshark basics, Apply concepts to captures",
-              "resources": [
-                {
-                  "title": "Fundamentals of Digital Forensics",
-                  "type": "book",
-                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
-                },
-                {
-                  "title": "Wireshark",
-                  "type": "tool/documentation",
-                  "link": "https://www.wireshark.org/"
-                }
-              ]
-            },
-            {
-              "title": "Practice Labs",
-              "description": "Do in order, no skips",
-              "resources": [
-                {
-                  "title": "pwn.college Digital Forensics modules",
-                  "type": "practice",
-                  "link": "https://pwn.college/"
-                },
-                {
-                  "title": "CyberDefenders",
-                  "type": "practice",
-                  "link": "https://cyberdefenders.org/"
-                },
-                {
-                  "title": "HTB Sherlocks",
-                  "type": "practice",
-                  "link": "https://app.hackthebox.com/sherlocks"
-                },
-                {
-                  "title": "TryHackMe DFIR rooms / File System Analysis / Disk Image Analysis",
-                  "type": "practice",
-                  "link": "https://tryhackme.com/"
-                }
-              ],
-              "sequence": [
-                "pwn.college Digital Forensics modules (filesystems + memory)",
-                "CyberDefenders: Disk Forensics → Memory Forensics → Network Forensics",
-                "HTB Sherlocks (Easy → Medium DFIR ones)",
-                "THM DFIR rooms / File System Analysis / Disk Image Analysis modules for targeted application"
-              ]
-            }
-          ]
-        },
-        "visual": {
-          "stages": [
-            {
-              "title": "Foundations",
-              "description": "",
-              "resources": [
-                {
-                  "title": "HTB Academy: Introduction to Digital Forensics",
-                  "type": "course",
-                  "link": "https://academy.hackthebox.com/"
-                },
-                {
-                  "title": "THM: DFIR: An Introduction",
-                  "type": "course",
-                  "link": "https://tryhackme.com/"
-                },
-                {
-                  "title": "THM: Digital Forensics Fundamentals",
-                  "type": "course",
-                  "link": "https://tryhackme.com/"
-                }
-              ]
-            },
-            {
-              "title": "Disk Forensics",
-              "description": "If available.",
-              "resources": [
-                {
-                  "title": "THM: File System Analysis module",
-                  "type": "course",
-                  "link": "https://tryhackme.com/"
-                },
-                {
-                  "title": "THM: Autopsy room",
-                  "type": "practice",
-                  "link": "https://tryhackme.com/"
-                },
-                {
-                  "title": "THM: Windows Forensics 1/2",
-                  "type": "course",
-                  "link": "https://tryhackme.com/"
-                },
-                {
-                  "title": "HTB Academy Linux Forensics module",
-                  "type": "course",
-                  "link": "https://academy.hackthebox.com/"
-                }
-              ]
-            },
-            {
-              "title": "Memory Forensics",
-              "description": "",
-              "resources": [
-                {
-                  "title": "THM Volatility rooms",
-                  "type": "practice",
-                  "link": "https://tryhackme.com/"
-                },
-                {
-                  "title": "THM Redline rooms",
-                  "type": "practice",
-                  "link": "https://tryhackme.com/"
-                },
-                {
-                  "title": "HTB Academy memory sections",
-                  "type": "course",
-                  "link": "https://academy.hackthebox.com/"
-                }
-              ]
-            },
-            {
-              "title": "Network Forensics",
-              "description": "",
-              "resources": [
-                {
-                  "title": "THM network forensics / PCAP rooms",
-                  "type": "practice",
-                  "link": "https://tryhackme.com/"
-                },
-                {
-                  "title": "CyberDefenders Network Forensics intro labs",
-                  "type": "practice",
-                  "link": "https://cyberdefenders.org/"
-                }
-              ]
-            },
-            {
-              "title": "Practice Labs",
-              "description": "",
-              "resources": [
-                {
-                  "title": "CyberDefenders",
-                  "type": "practice",
-                  "link": "https://cyberdefenders.org/"
-                },
-                {
-                  "title": "HTB Sherlocks",
-                  "type": "practice",
-                  "link": "https://app.hackthebox.com/sherlocks"
-                },
-                {
-                  "title": "pwn.college Digital Forensics",
-                  "type": "practice",
-                  "link": "https://pwn.college/"
-                },
-                {
-                  "title": "THM Advanced Endpoint Investigations / remaining DFIR path rooms",
-                  "type": "practice",
-                  "link": "https://tryhackme.com/"
-                }
-              ],
-              "sequence": [
-                "CyberDefenders tracks: Disk → Memory → Network (guided + free challenges first)",
-                "HTB Sherlocks (Easy DFIR first)",
-                "pwn.college Digital Forensics (filesystems + memory) for pure hands-on",
-                "THM Advanced Endpoint Investigations or remaining DFIR path rooms"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    {
-      "category": "Reverse",
-      "paths": {
-        "common": {
-          "stages": [
-            {
-              "title": "Mindset & Commitment",
-              "description": "Understand the commitment and mindset required for learning reverse engineering.",
-              "resources": [
-                {
-                  "title": "Are You Willing to Learn RE? - AT4RE",
-                  "link": "https://www.at4re.net/f/thread-1636.html"
-                },
-                {
-                  "title": "Reverse Engineering - Wikipedia",
-                  "link": "https://en.wikipedia.org/wiki/Reverse_engineering#Software"
-                },
-                {
-                  "title": "The Process of Mastering a Skill",
-                  "link": "https://azeria-labs.com/the-process-of-mastering-a-skill/"
-                },
-                {
-                  "title": "Split-Code External Blogs",
-                  "link": "https://www.split-code.com/external_blogs.html"
-                }
-              ]
-            },
-            {
-              "title": "Programming",
-              "description": "Build a solid foundation in low-level programming concepts and memory management.",
-              "resources": {
-                "book": [
-                  {
-                    "title": "Practical Reverse Engineering - Chapter 1",
-                    "link": "https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315"
-                  },
-                  {
-                    "title": "Practical Binary Analysis - Chapters 1–3",
-                    "link": "https://practicalbinaryanalysis.com/"
-                  }
-                ],
-                "visual": [
-                  {
-                    "title": "C Programming - Neso Academy",
-                    "link": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR"
-                  },
-                  {
-                    "title": "C Programming - Caleb Curry",
-                    "link": "https://www.youtube.com/playlist?list=PLVp0hvzMSQHTlz2CNlbhq-E6WYYujm7b8"
-                  },
-                  {
-                    "title": "Learn C++ (preferred)",
-                    "link": "https://learncpp.com/"
-                  }
-                ]
-              },
-              "topics": [
-                "C/C++",
-                "Pointers",
-                "Memory allocation",
-                "Low-level programming concepts"
-              ]
-            },
-            {
-              "title": "OS Basics",
-              "description": "Learn fundamental operating system concepts essential for reverse engineering.",
-              "resources": {
-                "visual": [
-                  {
-                    "title": "Operating Systems Playlist 1",
-                    "link": "https://www.youtube.com/playlist?list=PLxIvc-MGOs6ib0oK1z9C46DeKd9rRcSMY"
-                  },
-                  {
-                    "title": "Operating Systems Playlist 2",
-                    "link": "https://www.youtube.com/playlist?list=PLkpYqKNqc_CvCqERss2WBKWE3fb1jEmKE"
-                  },
-                  {
-                    "title": "Operating Systems Playlist 3",
-                    "link": "https://www.youtube.com/playlist?list=PLgre7dUq8DGKbtnlMuJPvPYlvLdXOC9uh"
-                  }
-                ]
-              },
-              "note": "These playlists are optional; you only need the basics of operating systems."
-            },
-            {
-              "title": "x86 / x86-64 Assembly Fundamentals",
-              "description": "Master the foundation of low-level analysis through assembly language.",
-              "resources": [
-                {
-                  "title": "Reverse Code Engineering - Mahara-Tech",
-                  "link": "https://maharatech.gov.eg/course/view.php?id=1423"
-                },
-                {
-                  "title": "x86-64 Assembly - YouTube",
-                  "link": "https://www.youtube.com/playlist?list=PLUFkSN0XLZ-m9B0DhHjkXd8foIMuZO1Gd"
-                },
-                {
-                  "title": "Architecture 1001: x86-64 Assembly (preferred)",
-                  "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1/about"
-                },
-                {
-                  "title": "Assembly Language Tutorial",
-                  "link": "https://www.youtube.com/watch?v=nGivmJMlBH8"
-                },
-                {
-                  "title": "Practical Reverse Engineering - Chapter 1",
-                  "link": "https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315"
-                }
-              ],
-              "topics": [
-                "Low-level programming",
-                "Assembly analysis",
-                "Analytical skills"
-              ],
-              "note": "Take modern x86-64 assembly slowly and practice along the way."
-            },
-            {
-              "title": "Binary Formats",
-              "description": "Understand how executables are structured and loaded into memory.",
-              "resources": [
-                {
-                  "title": "Life of Binaries",
-                  "link": "https://opensecuritytraining.info/LifeOfBinaries.html"
-                },
-                {
-                  "title": "Practical Binary Analysis - Chapters 1–3",
-                  "link": "https://practicalbinaryanalysis.com/"
-                }
-              ],
-              "topics": [
-                "Executable structure",
-                "Build structure",
-                "Windows binaries",
-                "PE loading concepts",
-                "ELF",
-                "PE"
-              ]
-            },
-            {
-              "title": "Reverse Engineering & Malware Analysis",
-              "description": "Apply reverse engineering skills to analyze and understand malicious software.",
-              "resources": [
-                {
-                  "title": "Practical Malware Analysis",
-                  "link": "https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901/ref=pd_bxgy_d_sccl_2/147-0820845-5157731?pd_rd_w=6ZrCa&content-id=amzn1.sym.dcf559c6-d374-405e-a13e-133e852d81e1&pf_rd_p=dcf559c6-d374-405e-a13e-133e852d81e1&pf_rd_r=916XKN23015TJAR7X8ZV&pd_rd_wg=DJEDH&pd_rd_r=ee10e4ae-714d-47b7-8f42-63ba113d0bc3&pd_rd_i=1593272901&psc=1"
-                },
-                {
-                  "title": "Learning Malware Analysis",
-                  "link": "https://www.amazon.com/dp/1788392507/ref=mes-dp?_encoding=UTF8"
-                },
-                {
-                  "title": "Mastering Malware Analysis (advanced)",
-                  "link": "https://www.amazon.com/Mastering-Malware-Analysis-practical-cybercrime-dp-1803240245/dp/1803240245/ref=dp_ob_title_bk"
-                }
-              ],
-              "notes": [
-                "The real work and practice starts here.",
-                "Practical Malware Analysis is the backbone and core of learning malware analysis and reverse engineering through practical exercises alongside the book.",
-                "Learning Malware Analysis is preferred for debugging topics since Practical Malware Analysis is relatively old.",
-                "Mastering Malware Analysis is an advanced resource."
-              ]
-            },
-            {
-              "title": "Windows Internals",
-              "description": "Deep dive into Windows architecture for advanced reverse engineering.",
-              "resources": [
-                {
-                  "title": "Windows Internals Book 1",
-                  "link": "https://www.microsoftpressstore.com/store/windows-internals-part-1-system-architecture-processes-9780735684188"
-                },
-                {
-                  "title": "Windows Internals Book 2",
-                  "link": "https://www.microsoftpressstore.com/store/windows-internals-part-2-9780135462409"
-                },
-                {
-                  "title": "Windows Internals Master Course by Pavel Yosifovich",
-                  "link": "https://trainsec.net/windows-internals-master/"
-                }
-              ],
-              "topics": [
-                "Processes",
-                "Memory manager",
-                "Loader behavior",
-                "Deeper Windows foundations"
-              ],
-              "note": "You do not need to finish Phase 4 before starting Phase 5; they can be studied together."
-            },
-            {
-              "title": "Practice Platforms",
-              "description": "",
-              "resources": [
-                {
-                  "title": "Crackmes.one",
-                  "link": "https://crackmes.one/",
-                  "focus": "Password checks, keygens, patching basics; best for building fundamentals"
-                },
-                {
-                  "title": "Root-me",
-                  "link": "https://root-me.org/",
-                  "focus": "Beginner and intermediate challenges; mix reversing with fundamentals"
-                },
-                {
-                  "title": "Google's Flare-ON CTF",
-                  "link": "https://flare-on.com/",
-                  "focus": "Yearly CTF"
-                },
-                {
-                  "title": "CTFtime",
-                  "link": "https://ctftime.org/",
-                  "focus": "Weekly online CTFs"
-                }
-              ]
-            },
-            {
-              "title": "Tools and Reference Material",
-              "description": "",
-              "resources": {
-                "video_resources": [
-                  {
-                    "title": "OALabs - Malware Analysis",
-                    "link": "https://www.youtube.com/@OALABS",
-                    "note": "Real-world-style walkthroughs; follow along and take notes"
-                  }
-                ],
-                "IDA Pro": [
-                  {
-                    "title": "IDA Pro",
-                    "type": "tool"
-                  },
-                  {
-                    "title": "The IDA Pro Book",
-                    "link": "https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898"
-                  },
-                  {
-                    "title": "Introduction to IDA Pro",
-                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1101_IntroIDA+2024_v1/about"
-                  }
-                ],
-                "Ghidra": [
-                  {
-                    "title": "Ghidra",
-                    "type": "tool"
-                  },
-                  {
-                    "title": "The Ghidra Book: The Definitive Guide",
-                    "link": "https://www.amazon.com/Ghidra-Book-Definitive-Guide/dp/1718501021"
-                  },
-                  {
-                    "title": "Introduction to Ghidra",
-                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1102_IntroGhidra+2024_v2/about"
-                  }
-                ],
-                "Binary Ninja": [
-                  {
-                    "title": "Binary Ninja",
-                    "type": "tool"
-                  },
-                  {
-                    "title": "Introduction to Binary Ninja",
-                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1103_Intro_Binja+2025_v1/about"
-                  }
-                ],
-                "GDB": [
-                  {
-                    "title": "GDB - Linux Debugging",
-                    "type": "tool"
-                  },
-                  {
-                    "title": "Introduction to GDB",
-                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1012_IntroGDB+2024_v1/about"
-                  }
-                ],
-                "WinDbg": [
-                  {
-                    "title": "WinDbg - Windows Debugging",
-                    "type": "tool"
-                  },
-                  {
-                    "title": "Introduction to WinDbg",
-                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1011_WinDbg1+2024_v1/about"
-                  }
-                ],
-                "x64dbg": [
-                  {
-                    "title": "x64dbg",
-                    "type": "tool",
-                    "note": "Powerful user-mode Windows debugger"
-                  }
-                ],
-                "Linux Resources": [
-                  {
-                    "title": "The Linux Programming Interface (Michael Kerrisk)",
-                    "link": "https://www.amazon.com/Linux-Programming-Interface-System-Handbook/dp/1593272200",
-                    "topics": [
-                      "syscalls",
-                      "processes",
-                      "files",
-                      "signals"
-                    ],
-                    "note": "Excellent for Linux reversing"
-                  }
-                ],
-                "Architecture References": [
-                  {
-                    "title": "Intel 64 and IA-32 Software Developer Manuals",
-                    "link": "https://cdrdv2.intel.com/v1/dl/getContent/671200",
-                    "note": "Authoritative reference for instructions, flags, and low-level details"
-                  },
-                  {
-                    "title": "AMD64 Architecture Programmer's Manual",
-                    "link": "https://bluewaters.ncsa.illinois.edu/liferay-content/document-library/amd_2_24593.pdf",
-                    "note": "Excellent alternative/reference for x86-64 specifics"
-                  }
-                ],
-                "Additional Windows Resources": [
-                  {
-                    "title": "Windows 10 System Programming (Pavel Yosifovich)",
-                    "link": "https://www.amazon.com/Windows-10-System-Programming-Part/dp/B086Y6M7LH"
-                  }
-                ]
-              }
-            },
-            {
-              "title": "Acknowledgments",
-              "description": "",
-              "resources": [
-                {
-                  "title": "0b3l1sk",
-                  "link": "https://eg.linkedin.com/in/mahmoud-abdullah-b35961152"
-                },
-                {
-                  "title": "ELJoOker",
-                  "link": "https://www.linkedin.com/in/youssef-ayman-79092624b/"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    },
-    {
-      "category": "Web",
+      "category": "web",
       "paths": {
         "common": {
           "stages": [
@@ -1017,6 +389,419 @@
       }
     },
     {
+      "category": "cryptography",
+      "paths": {
+        "book": {
+          "stages": [
+            {
+              "title": "Study cryptographic concepts from Understanding Cryptography.",
+              "resources": [
+                {
+                  "title": "Understanding Cryptography",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/11bywcNWGF-8NFLQPXGAC90_pbB4a3rMu/view?usp=sharing"
+                }
+              ]
+            },
+            {
+              "title": "Learn and apply concepts through CryptoHack Learn.",
+              "resources": [
+                {
+                  "title": "CryptoHack Learn",
+                  "type": "interactive_course",
+                  "link": "https://cryptohack.org/courses/"
+                }
+              ]
+            },
+            {
+              "title": "Practice cryptography challenges on CryptoHack.",
+              "resources": [
+                {
+                  "title": "CryptoHack Practice",
+                  "type": "practice",
+                  "link": "https://cryptohack.org/challenges/"
+                }
+              ]
+            }
+          ]
+        },
+        "visual": {
+          "stages": [
+            {
+              "title": "Learn cryptography concepts through CryptoHack and pwn.college material.",
+              "resources": [
+                {
+                  "title": "pwn.college",
+                  "type": "videos/course",
+                  "link": "https://pwn.college/"
+                },
+                {
+                  "title": "CryptoHack Learn",
+                  "type": "interactive_course",
+                  "link": "https://cryptohack.org/courses/"
+                }
+              ]
+            },
+            {
+              "title": "Apply concepts immediately through CryptoHack and pwn.college practice.",
+              "resources": [
+                {
+                  "title": "CryptoHack Practice",
+                  "type": "practice",
+                  "link": "https://cryptohack.org/challenges/"
+                },
+                {
+                  "title": "pwn.college Practice",
+                  "type": "practice",
+                  "link": "https://pwn.college/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "reverse",
+      "paths": {
+        "common": {
+          "stages": [
+            {
+              "title": "Mindset & Commitment",
+              "description": "Understand the commitment and mindset required for learning reverse engineering.",
+              "resources": [
+                {
+                  "title": "Are You Willing to Learn RE? - AT4RE",
+                  "link": "https://www.at4re.net/f/thread-1636.html"
+                },
+                {
+                  "title": "Reverse Engineering - Wikipedia",
+                  "link": "https://en.wikipedia.org/wiki/Reverse_engineering#Software"
+                },
+                {
+                  "title": "The Process of Mastering a Skill",
+                  "link": "https://azeria-labs.com/the-process-of-mastering-a-skill/"
+                },
+                {
+                  "title": "Split-Code External Blogs",
+                  "link": "https://www.split-code.com/external_blogs.html"
+                }
+              ]
+            },
+            {
+              "title": "Programming",
+              "description": "Build a solid foundation in low-level programming concepts and memory management.",
+              "resources": {
+                "book": [
+                  {
+                    "title": "Practical Reverse Engineering - Chapter 1",
+                    "link": "https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315"
+                  },
+                  {
+                    "title": "Practical Binary Analysis - Chapters 1\u20133",
+                    "link": "https://practicalbinaryanalysis.com/"
+                  }
+                ],
+                "visual": [
+                  {
+                    "title": "C Programming - Neso Academy",
+                    "link": "https://www.youtube.com/playlist?list=PLBlnK6fEyqRggZZgYpPMUxdY1CYkZtARR"
+                  },
+                  {
+                    "title": "C Programming - Caleb Curry",
+                    "link": "https://www.youtube.com/playlist?list=PLVp0hvzMSQHTlz2CNlbhq-E6WYYujm7b8"
+                  },
+                  {
+                    "title": "Learn C++ (preferred)",
+                    "link": "https://learncpp.com/"
+                  }
+                ]
+              },
+              "topics": [
+                "C/C++",
+                "Pointers",
+                "Memory allocation",
+                "Low-level programming concepts"
+              ]
+            },
+            {
+              "title": "OS Basics",
+              "description": "Learn fundamental operating system concepts essential for reverse engineering.",
+              "resources": {
+                "visual": [
+                  {
+                    "title": "Operating Systems Playlist 1",
+                    "link": "https://www.youtube.com/playlist?list=PLxIvc-MGOs6ib0oK1z9C46DeKd9rRcSMY"
+                  },
+                  {
+                    "title": "Operating Systems Playlist 2",
+                    "link": "https://www.youtube.com/playlist?list=PLkpYqKNqc_CvCqERss2WBKWE3fb1jEmKE"
+                  },
+                  {
+                    "title": "Operating Systems Playlist 3",
+                    "link": "https://www.youtube.com/playlist?list=PLgre7dUq8DGKbtnlMuJPvPYlvLdXOC9uh"
+                  }
+                ]
+              },
+              "note": "These playlists are optional; you only need the basics of operating systems."
+            },
+            {
+              "title": "x86 / x86-64 Assembly Fundamentals",
+              "description": "Master the foundation of low-level analysis through assembly language.",
+              "resources": [
+                {
+                  "title": "Reverse Code Engineering - Mahara-Tech",
+                  "link": "https://maharatech.gov.eg/course/view.php?id=1423"
+                },
+                {
+                  "title": "x86-64 Assembly - YouTube",
+                  "link": "https://www.youtube.com/playlist?list=PLUFkSN0XLZ-m9B0DhHjkXd8foIMuZO1Gd"
+                },
+                {
+                  "title": "Architecture 1001: x86-64 Assembly (preferred)",
+                  "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Arch1001_x86-64_Asm+2021_v1/about"
+                },
+                {
+                  "title": "Assembly Language Tutorial",
+                  "link": "https://www.youtube.com/watch?v=nGivmJMlBH8"
+                },
+                {
+                  "title": "Practical Reverse Engineering - Chapter 1",
+                  "link": "https://www.amazon.com/Practical-Reverse-Engineering-Reversing-Obfuscation/dp/1118787315"
+                }
+              ],
+              "topics": [
+                "Low-level programming",
+                "Assembly analysis",
+                "Analytical skills"
+              ],
+              "note": "Take modern x86-64 assembly slowly and practice along the way."
+            },
+            {
+              "title": "Binary Formats",
+              "description": "Understand how executables are structured and loaded into memory.",
+              "resources": [
+                {
+                  "title": "Life of Binaries",
+                  "link": "https://opensecuritytraining.info/LifeOfBinaries.html"
+                },
+                {
+                  "title": "Practical Binary Analysis - Chapters 1\u20133",
+                  "link": "https://practicalbinaryanalysis.com/"
+                }
+              ],
+              "topics": [
+                "Executable structure",
+                "Build structure",
+                "Windows binaries",
+                "PE loading concepts",
+                "ELF",
+                "PE"
+              ]
+            },
+            {
+              "title": "Reverse Engineering & Malware Analysis",
+              "description": "Apply reverse engineering skills to analyze and understand malicious software.",
+              "resources": [
+                {
+                  "title": "Practical Malware Analysis",
+                  "link": "https://www.amazon.com/Practical-Malware-Analysis-Hands-Dissecting/dp/1593272901/ref=pd_bxgy_d_sccl_2/147-0820845-5157731?pd_rd_w=6ZrCa&content-id=amzn1.sym.dcf559c6-d374-405e-a13e-133e852d81e1&pf_rd_p=dcf559c6-d374-405e-a13e-133e852d81e1&pf_rd_r=916XKN23015TJAR7X8ZV&pd_rd_wg=DJEDH&pd_rd_r=ee10e4ae-714d-47b7-8f42-63ba113d0bc3&pd_rd_i=1593272901&psc=1"
+                },
+                {
+                  "title": "Learning Malware Analysis",
+                  "link": "https://www.amazon.com/dp/1788392507/ref=mes-dp?_encoding=UTF8"
+                },
+                {
+                  "title": "Mastering Malware Analysis (advanced)",
+                  "link": "https://www.amazon.com/Mastering-Malware-Analysis-practical-cybercrime-dp-1803240245/dp/1803240245/ref=dp_ob_title_bk"
+                }
+              ],
+              "notes": [
+                "The real work and practice starts here.",
+                "Practical Malware Analysis is the backbone and core of learning malware analysis and reverse engineering through practical exercises alongside the book.",
+                "Learning Malware Analysis is preferred for debugging topics since Practical Malware Analysis is relatively old.",
+                "Mastering Malware Analysis is an advanced resource."
+              ]
+            },
+            {
+              "title": "Windows Internals",
+              "description": "Deep dive into Windows architecture for advanced reverse engineering.",
+              "resources": [
+                {
+                  "title": "Windows Internals Book 1",
+                  "link": "https://www.microsoftpressstore.com/store/windows-internals-part-1-system-architecture-processes-9780735684188"
+                },
+                {
+                  "title": "Windows Internals Book 2",
+                  "link": "https://www.microsoftpressstore.com/store/windows-internals-part-2-9780135462409"
+                },
+                {
+                  "title": "Windows Internals Master Course by Pavel Yosifovich",
+                  "link": "https://trainsec.net/windows-internals-master/"
+                }
+              ],
+              "topics": [
+                "Processes",
+                "Memory manager",
+                "Loader behavior",
+                "Deeper Windows foundations"
+              ],
+              "note": "You do not need to finish Phase 4 before starting Phase 5; they can be studied together."
+            },
+            {
+              "title": "Practice Platforms",
+              "description": "",
+              "resources": [
+                {
+                  "title": "Crackmes.one",
+                  "link": "https://crackmes.one/",
+                  "focus": "Password checks, keygens, patching basics; best for building fundamentals"
+                },
+                {
+                  "title": "Root-me",
+                  "link": "https://root-me.org/",
+                  "focus": "Beginner and intermediate challenges; mix reversing with fundamentals"
+                },
+                {
+                  "title": "Google's Flare-ON CTF",
+                  "link": "https://flare-on.com/",
+                  "focus": "Yearly CTF"
+                },
+                {
+                  "title": "CTFtime",
+                  "link": "https://ctftime.org/",
+                  "focus": "Weekly online CTFs"
+                }
+              ]
+            },
+            {
+              "title": "Tools and Reference Material",
+              "description": "",
+              "resources": {
+                "video_resources": [
+                  {
+                    "title": "OALabs - Malware Analysis",
+                    "link": "https://www.youtube.com/@OALABS",
+                    "note": "Real-world-style walkthroughs; follow along and take notes"
+                  }
+                ],
+                "IDA Pro": [
+                  {
+                    "title": "IDA Pro",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "The IDA Pro Book",
+                    "link": "https://www.amazon.com/IDA-Pro-Book-Unofficial-Disassembler/dp/1593272898"
+                  },
+                  {
+                    "title": "Introduction to IDA Pro",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1101_IntroIDA+2024_v1/about"
+                  }
+                ],
+                "Ghidra": [
+                  {
+                    "title": "Ghidra",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "The Ghidra Book: The Definitive Guide",
+                    "link": "https://www.amazon.com/Ghidra-Book-Definitive-Guide/dp/1718501021"
+                  },
+                  {
+                    "title": "Introduction to Ghidra",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1102_IntroGhidra+2024_v2/about"
+                  }
+                ],
+                "Binary Ninja": [
+                  {
+                    "title": "Binary Ninja",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "Introduction to Binary Ninja",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1103_Intro_Binja+2025_v1/about"
+                  }
+                ],
+                "GDB": [
+                  {
+                    "title": "GDB - Linux Debugging",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "Introduction to GDB",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1012_IntroGDB+2024_v1/about"
+                  }
+                ],
+                "WinDbg": [
+                  {
+                    "title": "WinDbg - Windows Debugging",
+                    "type": "tool"
+                  },
+                  {
+                    "title": "Introduction to WinDbg",
+                    "link": "https://p.ost2.fyi/courses/course-v1:OpenSecurityTraining2+Dbg1011_WinDbg1+2024_v1/about"
+                  }
+                ],
+                "x64dbg": [
+                  {
+                    "title": "x64dbg",
+                    "type": "tool",
+                    "note": "Powerful user-mode Windows debugger"
+                  }
+                ],
+                "Linux Resources": [
+                  {
+                    "title": "The Linux Programming Interface (Michael Kerrisk)",
+                    "link": "https://www.amazon.com/Linux-Programming-Interface-System-Handbook/dp/1593272200",
+                    "topics": [
+                      "syscalls",
+                      "processes",
+                      "files",
+                      "signals"
+                    ],
+                    "note": "Excellent for Linux reversing"
+                  }
+                ],
+                "Architecture References": [
+                  {
+                    "title": "Intel 64 and IA-32 Software Developer Manuals",
+                    "link": "https://cdrdv2.intel.com/v1/dl/getContent/671200",
+                    "note": "Authoritative reference for instructions, flags, and low-level details"
+                  },
+                  {
+                    "title": "AMD64 Architecture Programmer's Manual",
+                    "link": "https://bluewaters.ncsa.illinois.edu/liferay-content/document-library/amd_2_24593.pdf",
+                    "note": "Excellent alternative/reference for x86-64 specifics"
+                  }
+                ],
+                "Additional Windows Resources": [
+                  {
+                    "title": "Windows 10 System Programming (Pavel Yosifovich)",
+                    "link": "https://www.amazon.com/Windows-10-System-Programming-Part/dp/B086Y6M7LH"
+                  }
+                ]
+              }
+            },
+            {
+              "title": "Acknowledgments",
+              "description": "",
+              "resources": [
+                {
+                  "title": "0b3l1sk",
+                  "link": "https://eg.linkedin.com/in/mahmoud-abdullah-b35961152"
+                },
+                {
+                  "title": "ELJoOker",
+                  "link": "https://www.linkedin.com/in/youssef-ayman-79092624b/"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
       "category": "binary_exploitation",
       "paths": {
         "common": {
@@ -1180,6 +965,221 @@
                   "title": "pwn.college kernel-exploitation",
                   "link": "https://pwn.college/software-exploitation/kernel-exploitation/"
                 }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "category": "forensics",
+      "paths": {
+        "book": {
+          "stages": [
+            {
+              "title": "Foundations",
+              "description": "Methodology, Acquisition, Windows artifacts, Linux artifacts, Open-source tools",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics (K\u00e4vrestad, Birath, Clarke \u2013 3rd ed.)",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                }
+              ]
+            },
+            {
+              "title": "Disk Forensics",
+              "description": "File systems, Recovery, Registry, Timelines, Apply immediately",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                }
+              ]
+            },
+            {
+              "title": "Memory Forensics",
+              "description": "",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                },
+                {
+                  "title": "Volatility documentation/examples",
+                  "type": "documentation",
+                  "link": "https://volatility3.readthedocs.io/"
+                }
+              ]
+            },
+            {
+              "title": "Network Forensics",
+              "description": "Network forensics concepts, Wireshark basics, Apply concepts to captures",
+              "resources": [
+                {
+                  "title": "Fundamentals of Digital Forensics",
+                  "type": "book",
+                  "link": "https://drive.google.com/file/d/1OQqNnrulAsVNn8TXImzAOeoFwG9QpXGt/view?usp=sharing"
+                },
+                {
+                  "title": "Wireshark",
+                  "type": "tool/documentation",
+                  "link": "https://www.wireshark.org/"
+                }
+              ]
+            },
+            {
+              "title": "Practice Labs",
+              "description": "Do in order, no skips",
+              "resources": [
+                {
+                  "title": "pwn.college Digital Forensics modules",
+                  "type": "practice",
+                  "link": "https://pwn.college/"
+                },
+                {
+                  "title": "CyberDefenders",
+                  "type": "practice",
+                  "link": "https://cyberdefenders.org/"
+                },
+                {
+                  "title": "HTB Sherlocks",
+                  "type": "practice",
+                  "link": "https://app.hackthebox.com/sherlocks"
+                },
+                {
+                  "title": "TryHackMe DFIR rooms / File System Analysis / Disk Image Analysis",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                }
+              ],
+              "sequence": [
+                "pwn.college Digital Forensics modules (filesystems + memory)",
+                "CyberDefenders: Disk Forensics \u2192 Memory Forensics \u2192 Network Forensics",
+                "HTB Sherlocks (Easy \u2192 Medium DFIR ones)",
+                "THM DFIR rooms / File System Analysis / Disk Image Analysis modules for targeted application"
+              ]
+            }
+          ]
+        },
+        "visual": {
+          "stages": [
+            {
+              "title": "Foundations",
+              "description": "",
+              "resources": [
+                {
+                  "title": "HTB Academy: Introduction to Digital Forensics",
+                  "type": "course",
+                  "link": "https://academy.hackthebox.com/"
+                },
+                {
+                  "title": "THM: DFIR: An Introduction",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM: Digital Forensics Fundamentals",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                }
+              ]
+            },
+            {
+              "title": "Disk Forensics",
+              "description": "If available.",
+              "resources": [
+                {
+                  "title": "THM: File System Analysis module",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM: Autopsy room",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM: Windows Forensics 1/2",
+                  "type": "course",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "HTB Academy Linux Forensics module",
+                  "type": "course",
+                  "link": "https://academy.hackthebox.com/"
+                }
+              ]
+            },
+            {
+              "title": "Memory Forensics",
+              "description": "",
+              "resources": [
+                {
+                  "title": "THM Volatility rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "THM Redline rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "HTB Academy memory sections",
+                  "type": "course",
+                  "link": "https://academy.hackthebox.com/"
+                }
+              ]
+            },
+            {
+              "title": "Network Forensics",
+              "description": "",
+              "resources": [
+                {
+                  "title": "THM network forensics / PCAP rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                },
+                {
+                  "title": "CyberDefenders Network Forensics intro labs",
+                  "type": "practice",
+                  "link": "https://cyberdefenders.org/"
+                }
+              ]
+            },
+            {
+              "title": "Practice Labs",
+              "description": "",
+              "resources": [
+                {
+                  "title": "CyberDefenders",
+                  "type": "practice",
+                  "link": "https://cyberdefenders.org/"
+                },
+                {
+                  "title": "HTB Sherlocks",
+                  "type": "practice",
+                  "link": "https://app.hackthebox.com/sherlocks"
+                },
+                {
+                  "title": "pwn.college Digital Forensics",
+                  "type": "practice",
+                  "link": "https://pwn.college/"
+                },
+                {
+                  "title": "THM Advanced Endpoint Investigations / remaining DFIR path rooms",
+                  "type": "practice",
+                  "link": "https://tryhackme.com/"
+                }
+              ],
+              "sequence": [
+                "CyberDefenders tracks: Disk \u2192 Memory \u2192 Network (guided + free challenges first)",
+                "HTB Sherlocks (Easy DFIR first)",
+                "pwn.college Digital Forensics (filesystems + memory) for pure hands-on",
+                "THM Advanced Endpoint Investigations or remaining DFIR path rooms"
               ]
             }
           ]

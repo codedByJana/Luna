@@ -99,21 +99,29 @@ async function checkAutoBan(user, member) {
   return false;
 }
 
+// Variables capitalized first letter, values lower case unified - 6 categories persistent
 const CATEGORY_KEYS = {
-  Web: 'Web',
-  Cryptography: 'Cryptography',
-  Forensics: 'Forensics',
-  Reverse: 'Reverse',
-  binary_exploitation: 'binary_exploitation',
-  osint_misc: 'osint_misc',
+  Web: 'web',
+  Cryptography: 'cryptography',
+  Reverse: 'reverse',
+  Binary_exploitation: 'binary_exploitation',
+  Forensics: 'forensics',
+  Osint_misc: 'osint_misc',
 };
 
+function normalizeTaskCategory(input) {
+  if (!input || typeof input !== 'string') return null;
+  return String(input).trim().toLowerCase();
+}
+
 function getCategoryData(key) {
-  return curriculum.categories.find(c => c.category === key);
+  const normalized = normalizeTaskCategory(key) || String(key).toLowerCase();
+  return curriculum.categories.find(c => String(c.category).toLowerCase() === normalized);
 }
 
 function getStages(categoryKey, learnerType) {
-  const data = getCategoryData(categoryKey);
+  const normalizedKey = normalizeTaskCategory(categoryKey) || String(categoryKey).toLowerCase();
+  const data = getCategoryData(normalizedKey);
   if (!data) return [];
   const paths = data.paths || {};
   if (paths[learnerType]) return paths[learnerType].stages || [];
@@ -279,12 +287,14 @@ for (const key of Object.keys(tasks)) {
 }
 
 const allTemplates = [];
-for (const [category, paths] of Object.entries(tasks)) {
+for (const [shortKey, paths] of Object.entries(tasks)) {
+  // Map capitalized variable key to lower canonical value
+  const lowerCategory = CATEGORY_KEYS[shortKey] || String(shortKey).toLowerCase();
   for (const [learnerType, list] of Object.entries(paths)) {
     list.forEach((text, idx) => {
       const stageMatch = text.match(/\[Stage (\d+)\/(\d+)\]/);
       allTemplates.push({
-        category,
+        category: lowerCategory,
         learnerType,
         taskText: text,
         stage: stageMatch ? `Stage ${stageMatch[1]}` : null,

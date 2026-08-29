@@ -11,17 +11,14 @@ module.exports = {
     tasksChannelId: '1534705244838170805',
     generalChannelId: '1532502240450056489',
 
-    // Role IDs
-    verifiedRoleId: '1096511622576607283',
+    // Role IDs - variables capitalized first letter, values are role IDs (unified) - 6 categories persistent
     categoryRoles: {
         Web: '1534723540291424356',
         Cryptography: '1534723585615335551',
-        Forensics: '1534723782533447690',
         Reverse: '1534723660051644526',
-        binary_exploitation: '1534723716867559584',
-        osint_misc: '1534723840209453096',
-        // mobile: 'MOBILE_ROLE_ID',
-        // networking: 'NETWORKING_ROLE_ID'
+        Binary_exploitation: '1534723716867559584',
+        Forensics: '1534723782533447690',
+        Osint_misc: '1534723840209453096',
     },
     rankRoles: {
         puppy: '1534720184793956382',
