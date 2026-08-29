@@ -2,17 +2,40 @@ const { StringSelectMenuBuilder, ActionRowBuilder, MessageFlags } = require('dis
 const db = require('../utils/database');
 const config = require('../config');
 
+// Unified category handling - values lower case, variables capitalized first letter
+function normalizeCategory(input) {
+    if (!input || typeof input !== 'string') return null;
+    return String(input).trim().toLowerCase();
+}
+function getCanonicalKey(lowerValue) {
+    const map = {
+        'web': 'Web',
+        'cryptography': 'Cryptography',
+        'forensics': 'Forensics',
+        'reverse': 'Reverse',
+        'binary_exploitation': 'Binary_exploitation',
+        'osint_misc': 'Osint_misc',
+    };
+    return map[lowerValue] || lowerValue;
+}
+function getCategoryRoleId(categoryValue) {
+    if (!categoryValue) return null;
+    const lower = normalizeCategory(categoryValue);
+    const key = getCanonicalKey(lower);
+    return config.categoryRoles[key] || null;
+}
+
 async function startQuiz(interaction) {
   const categorySelect = new StringSelectMenuBuilder()
     .setCustomId('category_select')
     .setPlaceholder('Choose your category')
     .addOptions([
-      { label: 'Web Security', value: 'web', description: 'Web application security' },
-      { label: 'Binary Exploitation', value: 'binary', description: 'Binary exploitation' },
-      { label: 'Cryptography', value: 'crypto', description: 'Encryption & decryption' },
+      { label: 'Web', value: 'web', description: 'Web application security' },
+      { label: 'Cryptography', value: 'cryptography', description: 'Encryption & decryption' },
+      { label: 'Reverse Engineering', value: 'reverse', description: 'Reverse engineering & exploitation' },
+      { label: 'Binary Exploitation(Pwn)', value: 'binary_exploitation', description: 'Binary exploitation & pwn' },
       { label: 'Forensics', value: 'forensics', description: 'Digital forensics' },
-      { label: 'Reverse Engineering', value: 'reverse', description: 'Reverse Engineering' },
-      { label: 'Osint and Misc', value: 'osint_misc', description: 'Open Source Intelligence and Miscellaneous' },
+      { label: 'Osint and Misc', value: 'osint_misc', description: 'OSINT and miscellaneous' },
     ]);
 
   const row = new ActionRowBuilder().addComponents(categorySelect);
@@ -25,11 +48,14 @@ async function startQuiz(interaction) {
 }
 
 async function handleCategorySelect(interaction) {
-  const category = interaction.values[0];
-  if (!category) return;
+  const rawCategory = interaction.values[0];
+  if (!rawCategory) return;
+  const category = normalizeCategory(rawCategory) || String(rawCategory).toLowerCase();
 
   const userId = interaction.user.id;
-  const existing = await db.getUser(userId) || {};
+  const existingRaw = await db.getUser(userId) || {};
+  const existingCategory = normalizeCategory(existingRaw.category) || (existingRaw.category ? String(existingRaw.category).toLowerCase() : null);
+  const existing = { ...existingRaw, category: existingCategory };
 
   const isFirstTake = !existing.category;
   const isSameCategory = existing.category === category;
@@ -64,20 +90,18 @@ async function handleCategorySelect(interaction) {
 
   await db.saveUser(userData);
 
-  // Update Discord category roles
-  // Support both legacy name-based map (register/quiz) and ID-based config (quizHandler)
+  // Update Discord category roles - variables capitalized first letter, values lower case unified
   const roleMap = {
     'web': 'Web Security',
-    'binary': 'Binary Exploitation',
-    'crypto': 'Cryptography',
+    'cryptography': 'Cryptography',
     'forensics': 'Forensics',
-    'reverse': 'Reverse',
-    'osint_misc': 'osint_misc',
+    'reverse': 'Reverse Engineering',
+    'binary_exploitation': 'Binary Exploitation',
+    'osint_misc': 'OSINT & Misc',
   };
   try {
-    // Prefer config IDs if category matches config keys (Web, Cryptography, etc.)
-    const newRoleId = config.categoryRoles[category];
-    const oldRoleId = existing.category ? config.categoryRoles[existing.category] : null;
+    const newRoleId = getCategoryRoleId(category);
+    const oldRoleId = existing.category ? getCategoryRoleId(existing.category) : null;
 
     if (newRoleId) {
       if (!interaction.member.roles.cache.has(newRoleId)) {
