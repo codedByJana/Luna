@@ -108,7 +108,7 @@ async function handleLearnerTypeSelect(interaction) {
     const bookPayload = getRoadmapEmbed(category, 'book', 0);
     const visualPayload = getRoadmapEmbed(category, 'visual', 0);
     embedsToSend = [...bookPayload.embeds, ...visualPayload.embeds];
-    
+
     componentsToSend = [
       new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -135,7 +135,7 @@ async function handleViewBoth(interaction) {
   const category = interaction.customId.replace('view_both_', '');
   const book = getRoadmapEmbed(category, 'book', 0);
   const visual = getRoadmapEmbed(category, 'visual', 0);
-  
+
   await interaction.update({
     content: `Both styles for **${category}**:`,
     embeds: [...book.embeds, ...visual.embeds],
@@ -153,14 +153,10 @@ async function handler(interaction) {
       return handleLearnerTypeSelect(interaction);
     }
   }
-  
+
   if (interaction.isButton()) {
     if (interaction.customId.startsWith('view_both_')) {
       return handleViewBoth(interaction);
-    }
-    // Added routing for the Next/Prev/Switch buttons
-    if (interaction.customId.startsWith('roadmap_')) {
-      return handleRoadmapNavigation(interaction);
     }
   }
 }
@@ -168,6 +164,5 @@ async function handler(interaction) {
 module.exports = {
   handleInteraction: handler,
   startQuiz,
-  handleRoadmapNavigation,
   browseRoadmaps,
 };
