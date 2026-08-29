@@ -47,10 +47,6 @@ async function main() {
       fixed++;
     }
   }
-      console.log(`[reset]  -> after: lastTaskDate=${yesterday} missedDays=0 consistentDays=0`);
-      fixed++;
-    }
-  }
 
   console.log('---');
   console.log(`[reset] ${dryRun ? 'Would fix' : 'Fixed'} ${fixed} users`);
