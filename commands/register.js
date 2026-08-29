@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, StringSelectMenuBuilder, ActionRowBuilder, MessageFlags } = require('discord.js');
 const db = require('../utils/database');
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
   async execute(interaction) {
     const events = await db.getOpenEvents();
     if (!events || events.length === 0) {
-      return interaction.reply({ content: 'No open CTFs right now.', ephemeral: true });
+      return interaction.reply({ content: 'No open CTFs right now.', flags: MessageFlags.Ephemeral });
     }
 
     const menu = new StringSelectMenuBuilder()
@@ -28,7 +28,7 @@ module.exports = {
     await interaction.reply({
       content: 'Select the CTF you want to join:',
       components: [row],
-      ephemeral: true
+      flags: MessageFlags.Ephemeral
     });
   },
 };

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const db = require('../utils/database');
 const ranking = require('../handlers/rankingHandler');
 const curriculum = require('../ctf_curriculum_roadmap.json');
@@ -300,7 +300,7 @@ async function getDailyTasks(interaction) {
   const user = await db.getUser(userId);
 
   if (!user || !user.category) {
-    return interaction.reply({ content: 'You need to set your category first using /register.', ephemeral: true });
+    return interaction.reply({ content: 'You need to set your category first using /register.', flags: MessageFlags.Ephemeral });
   }
 
   const rankLabel = getRankFromPoints(user.points);
@@ -315,7 +315,7 @@ async function getDailyTasks(interaction) {
     )
     .setFooter({ text: 'React ✅ or use button to complete daily tasks' });
 
-  return interaction.reply({ embeds: [embed], ephemeral: true });
+  return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
 }
 
 module.exports = {

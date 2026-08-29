@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const db = require('../utils/database');
 const { isAlpha } = require('../utils/permissions');
 
@@ -30,7 +30,7 @@ module.exports = {
 
   async execute(interaction) {
     if (!isAlpha(interaction.member)) {
-      return interaction.reply({ content: 'Alpha role only.', ephemeral: true });
+      return interaction.reply({ content: 'Alpha role only.', flags: MessageFlags.Ephemeral });
     }
 
     const sub = interaction.options.getSubcommand();
@@ -40,27 +40,27 @@ module.exports = {
       if (!eventId) {
         const events = await db.getAllEvents();
         if (events.length === 0) {
-          return interaction.reply({ content: 'No events yet. Use `/event create`.', ephemeral: true });
+          return interaction.reply({ content: 'No events yet. Use `/event create`.', flags: MessageFlags.Ephemeral });
         }
         const lines = events
           .map(e => `• \`${e._id}\` — **${e.name}** [${e.status}]`)
           .join('\n');
         return interaction.reply({
           content: `Provide an event_id. Available events:\n${lines}`.slice(0, 1900),
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
 
       const event = await db.getEventById(eventId);
       if (!event) {
-        return interaction.reply({ content: 'Event not found.', ephemeral: true });
+        return interaction.reply({ content: 'Event not found.', flags: MessageFlags.Ephemeral });
       }
 
       const regs = await db.getRegistrations(eventId);
       if (regs.length === 0) {
         return interaction.reply({
           content: `No registrations for **${event.name}**.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
 
@@ -85,7 +85,7 @@ module.exports = {
         )
         .setFooter({ text: `Event ID: ${event._id}` });
 
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     }
 
     if (sub === 'mark') {
@@ -99,12 +99,12 @@ module.exports = {
       }
       const updated = await db.markRegistration(user.id, eventId, status);
       if (!updated) {
-        return interaction.reply({ content: 'Failed to update registration.', ephemeral: true });
+        return interaction.reply({ content: 'Failed to update registration.', flags: MessageFlags.Ephemeral });
       }
 
       return interaction.reply({
         content: `✅ Marked <@${user.id}> as **${status}** for event \`${eventId}\`.`,
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
   },

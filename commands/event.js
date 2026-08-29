@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const db = require('../utils/database');
 const { isAlpha } = require('../utils/permissions');
 
@@ -25,7 +25,7 @@ module.exports = {
 
   async execute(interaction) {
     if (!isAlpha(interaction.member)) {
-      return interaction.reply({ content: 'Alpha role only.', ephemeral: true });
+      return interaction.reply({ content: 'Alpha role only.', flags: MessageFlags.Ephemeral });
     }
 
     const sub = interaction.options.getSubcommand();
@@ -48,7 +48,7 @@ module.exports = {
           `✅ Event **${event.name}** created (${event.status}).\n` +
           `ID: \`${event._id}\`` +
           (event.date ? ` | Date: ${event.date}` : ''),
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -56,20 +56,20 @@ module.exports = {
       const eventId = interaction.options.getString('event_id');
       const event = await db.closeEvent(eventId);
       if (!event) {
-        return interaction.reply({ content: 'Event not found.', ephemeral: true });
+        return interaction.reply({ content: 'Event not found.', flags: MessageFlags.Ephemeral });
       }
-      return interaction.reply({ content: `🔒 Closed **${event.name}**.`, ephemeral: true });
+      return interaction.reply({ content: `🔒 Closed **${event.name}**.`, flags: MessageFlags.Ephemeral });
     }
 
     if (sub === 'list') {
       const events = await db.getAllEvents();
       if (events.length === 0) {
-        return interaction.reply({ content: 'No events yet.', ephemeral: true });
+        return interaction.reply({ content: 'No events yet.', flags: MessageFlags.Ephemeral });
       }
       const lines = events
         .map(e => `• \`${e._id}\` — **${e.name}** [${e.status}]${e.date ? ` (${e.date})` : ''}`)
         .join('\n');
-      return interaction.reply({ content: lines.slice(0, 1900), ephemeral: true });
+      return interaction.reply({ content: lines.slice(0, 1900), flags: MessageFlags.Ephemeral });
     }
   },
 };

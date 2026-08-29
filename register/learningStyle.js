@@ -1,3 +1,5 @@
+const { MessageFlags } = require('discord.js');
+
 async function askLearningStyle(interaction) {
   const row = new ActionRowBuilder()
     .addComponents(
@@ -16,6 +18,6 @@ async function askLearningStyle(interaction) {
   await interaction.followUp({
     content: 'What\'s your learning style?',
     components: [row],
-    ephemeral: true
+    flags: MessageFlags.Ephemeral
   });
 }

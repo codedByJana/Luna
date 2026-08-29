@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const db = require('../utils/database');
 const config = require('../config');
 
@@ -155,7 +155,7 @@ async function handler(interaction) {
     const user = await db.getUser(interaction.user.id) || { points: 0, rank: 'puppy', consistentDays: 0 };
     const embed = getRankEmbed(user, interaction.member);
 
-    return interaction.reply({ embeds: [embed], ephemeral: true });
+    return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
   }
 }
 

@@ -2,7 +2,8 @@ const {
   ActionRowBuilder,
   StringSelectMenuBuilder,
   ButtonBuilder,
-  ButtonStyle
+  ButtonStyle,
+  MessageFlags
 } = require('discord.js');
 
 const config = require('../config');
@@ -34,7 +35,7 @@ async function startQuiz(interaction) {
   await interaction.reply({
     content: '**Step 1/2 – Choose your category**',
     components: [row],
-    ephemeral: true
+    flags: MessageFlags.Ephemeral
   });
 }
 
@@ -136,18 +137,29 @@ async function handleViewBoth(interaction) {
   const book = getRoadmapEmbed(category, 'book', 0);
   const visual = getRoadmapEmbed(category, 'visual', 0);
   
-  await interaction.update({
+  const payload = {
     content: `Both styles for **${category}**:`,
     embeds: [...book.embeds, ...visual.embeds],
     components: [...book.components, ...visual.components],
-  });
+  };
+  if (interaction.deferred) {
+    await interaction.editReply(payload);
+  } else if (interaction.replied) {
+    await interaction.editReply(payload).catch(() => {});
+  } else {
+    await interaction.update(payload);
+  }
+  return true;
 }
 
 // ========== NAVIGATION BUTTONS ==========
 async function handleRoadmapNavigation(interaction) {
   // Guard clauses to prevent processing unintended interactions
-  if (!interaction.isButton()) return;
-  if (!interaction.customId.startsWith('roadmap_')) return;
+  if (!interaction.isButton()) return false;
+  if (!interaction.customId.startsWith('roadmap_')) return false;
+
+  // Prevent double-reply if already acknowledged (race condition / duplicate handler)
+  if (interaction.replied || interaction.deferred) return true;
 
   const id = interaction.customId;
   const [actionWithPrefix, category, path, indexStr] = id.split(':');
@@ -164,20 +176,44 @@ async function handleRoadmapNavigation(interaction) {
 
   const payload = getRoadmapEmbed(category, currentPath, stageIndex);
 
-  await interaction.update({
-    embeds: payload.embeds,
-    components: payload.components
-  });
+  // Safe update: interaction is a Button, not yet deferred/replied -> use update
+  // If somehow already deferred/replied (guard above), fallback to editReply
+  try {
+    if (interaction.deferred) {
+      await interaction.editReply({
+        embeds: payload.embeds,
+        components: payload.components
+      });
+    } else if (interaction.replied) {
+      await interaction.editReply({
+        embeds: payload.embeds,
+        components: payload.components
+      }).catch(() => {});
+    } else {
+      await interaction.update({
+        embeds: payload.embeds,
+        components: payload.components
+      });
+    }
+  } catch (err) {
+    // Ignore InteractionAlreadyReplied - happens on rapid double-click
+    if (err.code !== 'InteractionAlreadyReplied' && err.code !== 40060) {
+      throw err;
+    }
+  }
+  return true;
 }
 
 // ========== MAIN HANDLER ==========
 async function handler(interaction) {
   if (interaction.isStringSelectMenu()) {
     if (interaction.customId === 'select_category') {
-      return handleCategorySelect(interaction);
+      await handleCategorySelect(interaction);
+      return true;
     }
     if (interaction.customId.startsWith('select_learner_')) {
-      return handleLearnerTypeSelect(interaction);
+      await handleLearnerTypeSelect(interaction);
+      return true;
     }
   }
   
@@ -189,6 +225,7 @@ async function handler(interaction) {
       return handleRoadmapNavigation(interaction);
     }
   }
+  return false;
 }
 
 module.exports = {

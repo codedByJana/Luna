@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags } = require('discord.js');
 const db = require('../utils/database');
 const ranking = require('./rankingHandler');
 const config = require('../config');
@@ -142,7 +142,11 @@ async function handleTaskDone(interaction) {
   const date = parts.slice(3).join('_');
 
   if (interaction.user.id !== userId) {
-    return interaction.reply({ content: 'This is not your task button.', ephemeral: true });
+    // Guard against double-reply
+    if (interaction.deferred || interaction.replied) {
+      return interaction.followUp({ content: 'This is not your task button.', flags: MessageFlags.Ephemeral }).catch(() => {});
+    }
+    return interaction.reply({ content: 'This is not your task button.', flags: MessageFlags.Ephemeral });
   }
 
   // Ensure member is available (interaction.member may be partial)
@@ -150,7 +154,10 @@ async function handleTaskDone(interaction) {
 
   const completion = await completeTaskForUser(member, date);
   if (completion.error) {
-    return interaction.reply({ content: completion.error, ephemeral: true });
+    if (interaction.deferred || interaction.replied) {
+      return interaction.followUp({ content: completion.error, flags: MessageFlags.Ephemeral }).catch(() => {});
+    }
+    return interaction.reply({ content: completion.error, flags: MessageFlags.Ephemeral });
   }
 
   let msg = `Tasks recorded! +${COMPLETE_BONUS} point → **${completion.newPoints} pts** | Rank: **${completion.newRank}**`;
@@ -158,7 +165,10 @@ async function handleTaskDone(interaction) {
     msg += `\n🎉 Rank up! Welcome to **${completion.newRank}**!`;
   }
 
-  return interaction.reply({ content: msg, ephemeral: true });
+  if (interaction.deferred || interaction.replied) {
+    return interaction.followUp({ content: msg, flags: MessageFlags.Ephemeral }).catch(() => {});
+  }
+  return interaction.reply({ content: msg, flags: MessageFlags.Ephemeral });
 }
 
 /**

@@ -1,4 +1,4 @@
-const { StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
+const { StringSelectMenuBuilder, ActionRowBuilder, MessageFlags } = require('discord.js');
 
 async function startQuiz(interaction) {
   const categorySelect = new StringSelectMenuBuilder()
@@ -16,7 +16,7 @@ async function startQuiz(interaction) {
   await interaction.followUp({
     content: 'Select your primary learning category:',
     components: [row],
-    ephemeral: true
+    flags: MessageFlags.Ephemeral
   });
 }
 
