@@ -24,6 +24,14 @@ function getCategoryRoleId(categoryValue) {
     const key = getCanonicalKey(lower);
     return config.categoryRoles[key] || null;
 }
+function todayStr(date = new Date()) {
+    return date.toISOString().split('T')[0];
+}
+function yesterdayStr(today = todayStr()) {
+    const d = new Date(`${today}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() - 1);
+    return d.toISOString().split('T')[0];
+}
 
 async function startQuiz(interaction) {
   const categorySelect = new StringSelectMenuBuilder()
@@ -64,6 +72,7 @@ async function handleCategorySelect(interaction) {
   let userData;
   if (isFirstTake || isSwitch) {
     // first take OR category override -> assign category and reset rank to puppy
+    // Use yesterday as baseline to avoid 13-day retroactive penalty
     userData = {
       userId,
       category,
@@ -71,11 +80,12 @@ async function handleCategorySelect(interaction) {
       points: 0,
       consistentDays: 0,
       missedDays: 0,
-      lastTaskDate: null,
+      lastTaskDate: yesterdayStr(),
       rank: 'puppy'
     };
   } else if (isSameCategory) {
     // same category retake -> preserve points/rank (evolves via tasks/scoring)
+    // If lastTaskDate is still null, initialize to yesterday to avoid retroactive penalty
     userData = {
       userId,
       category,
@@ -83,7 +93,7 @@ async function handleCategorySelect(interaction) {
       points: existing.points ?? 0,
       consistentDays: existing.consistentDays ?? 0,
       missedDays: existing.missedDays ?? 0,
-      lastTaskDate: existing.lastTaskDate ?? null,
+      lastTaskDate: existing.lastTaskDate ?? yesterdayStr(),
       rank: existing.rank ?? 'puppy'
     };
   }

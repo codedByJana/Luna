@@ -33,6 +33,14 @@ function getCategoryRoleId(categoryValue) {
     const key = getCanonicalKey(lower);
     return config.categoryRoles[key] || null;
 }
+function todayStr(date = new Date()) {
+    return date.toISOString().split('T')[0];
+}
+function yesterdayStr(today = todayStr()) {
+    const d = new Date(`${today}T00:00:00Z`);
+    d.setUTCDate(d.getUTCDate() - 1);
+    return d.toISOString().split('T')[0];
+}
 
 async function browseRoadmaps(interaction) {
   // Routes to the start quiz menu as a fallback. 
@@ -82,7 +90,7 @@ async function handleCategorySelect(interaction) {
   let userData;
   if (isFirstTake || isSwitch) {
     // First take OR switching category -> assign new category and reset to puppy
-    // e.g. crypto -> Web ==> Web + puppy (points reset)
+    // Do not use null lastTaskDate (causes 13-day retroactive penalty). Start from yesterday.
     userData = {
       userId,
       category,
@@ -90,11 +98,12 @@ async function handleCategorySelect(interaction) {
       points: 0,
       consistentDays: 0,
       missedDays: 0,
-      lastTaskDate: null,
+      lastTaskDate: yesterdayStr(),
       rank: 'puppy'
     };
   } else if (isSameCategory) {
     // Same category retake -> preserve scoring state (rank evolves via tasks)
+    // If lastTaskDate is still null (never completed task), initialize to yesterday
     userData = {
       userId,
       category,
@@ -102,7 +111,7 @@ async function handleCategorySelect(interaction) {
       points: existingRaw.points ?? 0,
       consistentDays: existingRaw.consistentDays ?? 0,
       missedDays: existingRaw.missedDays ?? 0,
-      lastTaskDate: existingRaw.lastTaskDate ?? null,
+      lastTaskDate: existingRaw.lastTaskDate ?? yesterdayStr(),
       rank: existingRaw.rank ?? 'puppy'
     };
   }

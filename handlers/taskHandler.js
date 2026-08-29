@@ -239,15 +239,18 @@ async function checkMissedDays(client) {
   for (const user of users) {
     try {
       let last = user.lastTaskDate;
-      // Handle never-completed users: use account creation date or updatedAt as baseline
+      // FIX: Do not use createdAt/updatedAt for users who never completed a task.
+      // That caused 13 days penalty since deployment. Start counting from today instead.
       if (!last) {
-        if (user.createdAt) {
-          last = new Date(user.createdAt).toISOString().split('T')[0];
-        } else if (user.updatedAt) {
-          last = new Date(user.updatedAt).toISOString().split('T')[0];
-        } else {
-          continue;
-        }
+        // New user or legacy user with null lastTaskDate: initialize to yesterday (no retroactive penalty)
+        // and skip this run. From tomorrow, missed days will be counted correctly.
+        await db.saveUser({
+          ...user,
+          lastTaskDate: yesterday,
+          missedDays: 0,
+          consistentDays: 0,
+        });
+        continue;
       }
 
       const gap = diffDays(last, today);
