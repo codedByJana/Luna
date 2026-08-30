@@ -71,10 +71,16 @@ taskTemplateSchema.index(
   { unique: true }
 );
 
+const settingSchema = new mongoose.Schema({
+  key: { type: String, required: true, unique: true },
+  value: { type: String, required: true },
+}, { timestamps: true });
+
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 const CtfEvent = mongoose.models.CtfEvent || mongoose.model('CtfEvent', ctfEventSchema);
 const Registration = mongoose.models.Registration || mongoose.model('Registration', registrationSchema);
 const TaskTemplate = mongoose.models.TaskTemplate || mongoose.model('TaskTemplate', taskTemplateSchema);
+const Setting = mongoose.models.Setting || mongoose.model('Setting', settingSchema);
 
 let connectionPromise = null;
 
@@ -257,6 +263,26 @@ async function deactivateTaskTemplate(id) {
   return TaskTemplate.updateOne({ _id: id }, { $set: { active: false } });
 }
 
+async function getSetting(key) {
+  await connectToDatabase();
+  const doc = await Setting.findOne({ key }).lean();
+  return doc ? doc.value : null;
+}
+
+async function setSetting(key, value) {
+  await connectToDatabase();
+  await Setting.updateOne({ key }, { $set: { value } }, { upsert: true });
+  return value;
+}
+
+async function getTaskEpoch() {
+  return getSetting('taskEpoch');
+}
+
+async function setTaskEpoch(dateStr) {
+  return setSetting('taskEpoch', dateStr);
+}
+
 module.exports = {
   connectToDatabase,
   getUser,
@@ -278,5 +304,9 @@ module.exports = {
   seedTaskTemplates,
   addTaskTemplate,
   deactivateTaskTemplate,
-  models: { User, CtfEvent, Registration, TaskTemplate },
+  getSetting,
+  setSetting,
+  getTaskEpoch,
+  setTaskEpoch,
+  models: { User, CtfEvent, Registration, TaskTemplate, Setting },
 };

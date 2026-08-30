@@ -14,7 +14,7 @@ const client = new Client({
   partials: [Partials.Channel, Partials.Message, Partials.GuildMember, Partials.Reaction, Partials.User]
 });
 
-taskHandler.startCronJobs(client);
+// Cron jobs are started in events/ready.js after client is ready and guilds cached
 client.commands = new Collection();
 
 // C. Tracking completion via ✅ reaction
